@@ -1,7 +1,38 @@
-<div>
-    <form>
-        <input type="text" placeholder="Email" name="login" [(ngModel)]="email" required />
-        <input type="password" placeholder="Hasło" name="password" [(ngModel)]="password" required />
-        <button (click)="login()">Zaloguj</button>
-    </form>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h2 class="logo-text">MonsterGarage</h2>
+        </div>
+
+        <div class="col-md-4">
+
+        </div>
+
+        <div class="form col-md-4">
+            <form>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="text" class="form-control" id="email" name="email" [(ngModel)]="email" required />
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Hasło</label>
+                    <span class="forget-link"><a href="/">Nie pamiętasz hasła?</a></span>
+                    <input type="password" class="form-control" id="password" name="password" [(ngModel)]="password" required />
+                </div>
+
+                <div class="form-group text-center">
+                    <button (click)="login()" class="btn btn-success btn-block">Zaloguj</button>
+                </div>
+
+                <div>
+                    <span>Nie masz konta? <a href="/">Stwórz!</a></span>
+                </div>
+            </form>
+        </div>
+
+        <div class="col-md-4">
+
+        </div>
+    </div>
 </div>

@@ -1,0 +1,17 @@
+.logo-text {
+    margin-top: 10%;
+    text-align: center;
+}
+
+div.form {
+    background-color: #FFF;
+    padding: 25px;
+    border: 1px solid #999;
+    border-radius: 5px;
+}
+
+span.forget-link {
+    margin-top: 3px;
+    font-size: 0.9em;
+    float: right;
+}
