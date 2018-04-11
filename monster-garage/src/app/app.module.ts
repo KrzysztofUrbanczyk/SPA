@@ -7,6 +7,11 @@ import {LoginComponent} from './login/login.component';
 import {UserComponent} from './user/user.component';
 import {AppRoutingModule} from './app-routing.module';
 import {FormsModule} from "@angular/forms";
+import {AngularFireModule} from 'angularfire2';
+import {AngularFirestoreModule} from 'angularfire2/firestore';
+import {AngularFireAuthModule} from 'angularfire2/auth';
+import {environment} from '../environments/environment';
+
 
 @NgModule({
     declarations: [
@@ -19,7 +24,10 @@ import {FormsModule} from "@angular/forms";
     imports: [
         BrowserModule,
         FormsModule,
-        AppRoutingModule
+        AppRoutingModule,
+        AngularFireModule.initializeApp(environment.firebase),
+        AngularFirestoreModule,
+        AngularFireAuthModule
     ],
     providers: [],
     bootstrap: [AppComponent]
