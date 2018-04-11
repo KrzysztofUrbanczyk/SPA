@@ -11,6 +11,7 @@ import {AngularFireModule} from 'angularfire2';
 import {AngularFirestoreModule} from 'angularfire2/firestore';
 import {AngularFireAuthModule} from 'angularfire2/auth';
 import {environment} from '../environments/environment';
+import { RegisterComponent } from './register/register.component';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import {environment} from '../environments/environment';
         MenuComponent,
         ContentComponent,
         LoginComponent,
-        UserComponent
+        UserComponent,
+        RegisterComponent
     ],
     imports: [
         BrowserModule,
