@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Router} from "@angular/router";
+import {Router} from '@angular/router';
 import { AuthService } from '../core/auth.service';
 
 @Component({
@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
     }
 
     login() {
-        if (this.email == 'root' && this.password == 'root') {
+        if (this.email === 'root' && this.password === 'root') {
             this.router.navigate(['user']);
         } else {
             alert('Nie istnieje taki użytkownik');

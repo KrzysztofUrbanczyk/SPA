@@ -6,13 +6,12 @@ import {ContentComponent} from './content/content.component';
 import {LoginComponent} from './login/login.component';
 import {UserComponent} from './user/user.component';
 import {AppRoutingModule} from './app-routing.module';
-import {FormsModule} from "@angular/forms";
+import {FormsModule} from '@angular/forms';
 import {AngularFireModule} from 'angularfire2';
 
 import {environment} from '../environments/environment';
 import { RegisterComponent } from './register/register.component';
 import { CoreModule } from './core/core.module';
-import { AngularFontAwesomeModule } from 'angular-font-awesome';
 
 @NgModule({
     declarations: [
@@ -28,7 +27,6 @@ import { AngularFontAwesomeModule } from 'angular-font-awesome';
         FormsModule,
         AppRoutingModule,
         AngularFireModule.initializeApp(environment.firebase),
-        AngularFontAwesomeModule,
         CoreModule
     ],
     providers: [],

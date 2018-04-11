@@ -28,28 +28,28 @@ export class AuthService {
     this.user = this.afAuth.authState
       .switchMap(user => {
         if (user) {
-          return this.afs.doc<User>('userts/${user.uid}').valueChanges()
+          return this.afs.doc<User>('userts/${user.uid}').valueChanges();
         } else {
-          return Observable.of(null)
+          return Observable.of(null);
         }
-      })
+      });
   }
 
   twitterLogin() {
-    const provider = new firebase.auth.TwitterAuthProvider()
+    const provider = new firebase.auth.TwitterAuthProvider();
     return this.oAuthLogin(provider);
   }
 
   facebookLogin() {
-    const provider = new firebase.auth.FacebookAuthProvider()
+    const provider = new firebase.auth.FacebookAuthProvider();
     return this.oAuthLogin(provider);
   }
 
   private oAuthLogin(provider) {
     return this.afAuth.auth.signInWithPopup(provider)
       .then((credential) => {
-        this.updateUserData(credential.user)
-      })
+        this.updateUserData(credential.user);
+      });
   }
 
   private updateUserData(user) {
@@ -60,8 +60,8 @@ export class AuthService {
       email: user.email,
       displayName: user.displayName,
       photoURL: user.photoURL
-    }
+    };
 
-    return userRef.set(data)
+    return userRef.set(data);
   }
 }
