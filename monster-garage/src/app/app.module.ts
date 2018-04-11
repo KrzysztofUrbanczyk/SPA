@@ -12,7 +12,6 @@ import {AngularFireModule} from 'angularfire2';
 import {environment} from '../environments/environment';
 import { RegisterComponent } from './register/register.component';
 import { CoreModule } from './core/core.module';
-import { AngularFontAwesomeModule } from 'angular-font-awesome';
 
 @NgModule({
     declarations: [
@@ -28,7 +27,6 @@ import { AngularFontAwesomeModule } from 'angular-font-awesome';
         FormsModule,
         AppRoutingModule,
         AngularFireModule.initializeApp(environment.firebase),
-        AngularFontAwesomeModule,
         CoreModule
     ],
     providers: [],
