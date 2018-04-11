@@ -13,14 +13,36 @@
                 </div>
                 <div class="form-group">
                     <label for="password">Hasło</label>
-                    <span class="forget-link"><a href="/">Nie pamiętasz hasła?</a></span>
+                    <span class="forget-link">
+                        <a href="/">Nie pamiętasz hasła?</a>
+                    </span>
                     <input type="password" class="form-control" id="password" name="password" [(ngModel)]="password" required />
                 </div>
                 <div class="form-group text-center">
                     <button (click)="login()" class="btn btn-success btn-block">Zaloguj</button>
                 </div>
                 <div>
-                    <span>Nie masz konta? <a href="/">Stwórz!</a></span>
+                    <span>Nie masz konta?
+                        <a href="/">Stwórz!</a>
+                    </span>
+                </div>
+                <hr>
+                <span>Lub przy pomocy:</span>
+                <div class="row">    
+                    <div class="col-lg-2">
+                    </div>
+                    <div class="col-lg-4 text-center social-media">
+                        <a class="btn btn-social-icon btn-facebook">
+                            <span (click)="auth.facebookLogin()" class="fa fa-facebook"></span>
+                        </a>
+                    </div>
+                    <div class="col-lg-4 text-center social-media">
+                        <a class="btn btn-social-icon btn-twitter">
+                            <span (click)="auth.twitterLogin()" class="fa fa-twitter"></span>
+                        </a>
+                    </div>
+                    <div class="col-lg-2">
+                    </div>
                 </div>
             </form>
         </div>
