@@ -6,7 +6,7 @@ import {ContentComponent} from './content/content.component';
 import {LoginComponent} from './login/login.component';
 import {UserComponent} from './user/user.component';
 import {AppRoutingModule} from './app-routing.module';
-import {FormsModule} from "@angular/forms";
+import {FormsModule} from '@angular/forms';
 import {AngularFireModule} from 'angularfire2';
 
 import {environment} from '../environments/environment';
