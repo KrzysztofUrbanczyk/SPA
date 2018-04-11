@@ -7,8 +7,12 @@
     "start": "ng serve",
     "build": "ng build --prod",
     "test": "ng test",
-    "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "build:prod": "npm run build -- --prod --aot",
+    "lint": "ng lint --type-check",
+    "lint:fix": "ng lint --fix",
+    "lint:ci": "npm run lint",
+    "prepush": "npm run lint:ci"
   },
   "private": true,
   "dependencies": {
