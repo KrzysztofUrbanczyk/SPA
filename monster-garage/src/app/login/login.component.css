@@ -38,5 +38,9 @@ span.forget-link {
     text-align: center;
 }
 
+.icons > a > span {
+    width: 100%;
+}
+
 
   
