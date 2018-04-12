@@ -12,7 +12,7 @@
     "lint": "ng lint --type-check",
     "lint:fix": "ng lint --fix",
     "lint:ci": "npm run lint",
-    "prepush": "npm run lint:ci"
+    "precommit": "npm run lint:ci"
   },
   "private": true,
   "dependencies": {
@@ -25,6 +25,7 @@
     "@angular/platform-browser": "^5.2.0",
     "@angular/platform-browser-dynamic": "^5.2.0",
     "@angular/router": "^5.2.0",
+    "@nebular/theme": "^2.0.0-rc.6",
     "angular-font-awesome": "^3.1.2",
     "angularfire2": "^5.0.0-rc.6.0",
     "bootstrap": "^4.1.0",

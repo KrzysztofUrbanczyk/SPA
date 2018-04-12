@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
 
     login() {
         if (this.email === 'root' && this.password === 'root') {
-            this.router.navigate(['user']);
+            this.router.navigate(['dashboard']);
         } else {
             alert('Nie istnieje taki użytkownik');
         }

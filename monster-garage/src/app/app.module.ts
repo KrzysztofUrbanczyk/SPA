@@ -13,6 +13,9 @@ import {environment} from '../environments/environment';
 import { RegisterComponent } from './register/register.component';
 import { CoreModule } from './core/core.module';
 
+import { ThemeModule } from './@theme/theme.module';
+import { DashboardComponent } from './dashboard/dashboard.component';
+
 @NgModule({
     declarations: [
         AppComponent,
@@ -21,13 +24,16 @@ import { CoreModule } from './core/core.module';
         LoginComponent,
         UserComponent,
         RegisterComponent,
+        DashboardComponent
     ],
     imports: [
         BrowserModule,
         FormsModule,
         AppRoutingModule,
         AngularFireModule.initializeApp(environment.firebase),
-        CoreModule
+        CoreModule,
+        ThemeModule.forRoot(),
+
     ],
     providers: [],
     bootstrap: [AppComponent]
