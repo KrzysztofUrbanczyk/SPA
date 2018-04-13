@@ -1,0 +1,53 @@
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <h2 class="logo-text">MonsterGarage</h2>
+        </div>
+        <div class="col-lg-4">
+        </div>
+        <div class="form col-lg-4">
+            <form>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="text" class="form-control" id="email" name="email" [(ngModel)]="email" required />
+                </div>
+                <div class="form-group">
+                    <label for="password">Hasło</label>
+                    <span class="forget-link">
+                        <a tabindex="-1" href="/">Nie pamiętasz hasła?</a>
+                    </span>
+                    <input type="password" class="form-control" id="password" name="password" [(ngModel)]="password" required />
+                </div>
+                <div class="form-group text-center">
+                    <button (click)="login()" class="btn btn-success btn-block">Zaloguj</button>
+                </div>
+                <hr />
+                <div class="social-login-text">
+                    <span>Nie masz konta?
+                        <a href="/#/register">Stwórz!</a>
+                    </span>
+                </div>
+                <hr />
+                <div class="social-login-text">
+                    <span>Wykorzystaj do zalogowania</span>
+                </div>
+                <hr />
+                <div class="text-center icons">
+                    <a>
+                        <span (click)="authService.facebookLogin()" class="fa fa-facebook"></span>
+                    </a>
+                </div>
+                <div class="text-center icons">
+                    <a>
+                        <span (click)="authService.twitterLogin()" class="fa fa-twitter"></span>
+                    </a>
+                </div>
+                <div class="form-group text-center">
+                    <button (click)="authService.logout()" class="btn btn-success btn-block">Wyloguj Test</button>
+                </div>
+            </form>
+        </div>
+        <div class="col-lg-4">
+        </div>
+    </div>
+</div>
