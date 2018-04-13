@@ -21,6 +21,6 @@ export class RegisterComponent implements OnInit {
   register() {
     this.authService.signup(this.email, this.password);
     this.email = this.password = '';
-    this.router.navigateByUrl('/login');
+    this.router.navigate(['login']);
   }
 }
