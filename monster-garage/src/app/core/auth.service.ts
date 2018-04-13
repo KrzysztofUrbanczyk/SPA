@@ -7,7 +7,6 @@ import { AngularFirestore, AngularFirestoreDocument } from 'angularfire2/firesto
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/switchMap';
-import { OAuthProvider } from '@firebase/auth-types';
 
 interface User {
   uid: string;
