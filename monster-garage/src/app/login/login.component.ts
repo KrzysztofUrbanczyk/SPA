@@ -21,6 +21,6 @@ export class LoginComponent implements OnInit {
   login() {
     this.authService.emailLogin(this.email, this.password);
     this.email = this.password = '';
-    setTimeout(() => this.router.navigateByUrl('/dashboard'), 2000);
+    setTimeout(() => this.router.navigateByUrl('/pages'), 2000);
   }
 }
