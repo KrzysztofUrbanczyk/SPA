@@ -11,7 +11,7 @@ export class LoginComponent implements OnInit {
     email: string;
     password: string;
 
-    constructor(public auth: AuthService,
+    constructor(public authService: AuthService,
                 private router: Router) {
     }
 
@@ -19,10 +19,8 @@ export class LoginComponent implements OnInit {
     }
 
     login() {
-        if (this.email === 'root' && this.password === 'root') {
-            this.router.navigate(['dashboard']);
-        } else {
-            alert('Nie istnieje taki użytkownik');
-        }
+        this.authService.emailLogin(this.email, this.password);
+        this.email = this.password = '';
+        this.router.navigateByUrl('/dashboard');
     }
 }
