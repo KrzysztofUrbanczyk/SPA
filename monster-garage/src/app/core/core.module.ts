@@ -15,4 +15,5 @@ import { NotifyService } from './notify.service';
   declarations: [],
   providers: [AuthService, NotifyService]
 })
-export class CoreModule { }
+export class CoreModule {
+}

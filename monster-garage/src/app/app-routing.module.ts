@@ -6,20 +6,20 @@ import { RegisterComponent } from './register/register.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 
 const routes: Routes = [
-    {path: '', redirectTo: 'login', pathMatch: 'full'},
-    { path: 'user', component: UserComponent, /*resolve: {data: UserResolver}*/ },
-    { path: 'login', component: LoginComponent, /*canActivate: [AuthGuard]*/ },
-    { path: 'register', component: RegisterComponent, /*canActivate: [AuthGuard]*/ },
-    { path: 'dashboard', component: DashboardComponent, /*canActivate: [AuthGuard]*/ },
+  {path: '', redirectTo: 'login', pathMatch: 'full'},
+  {path: 'user', component: UserComponent, /*resolve: {data: UserResolver}*/},
+  {path: 'login', component: LoginComponent, /*canActivate: [AuthGuard]*/},
+  {path: 'register', component: RegisterComponent, /*canActivate: [AuthGuard]*/},
+  {path: 'dashboard', component: DashboardComponent, /*canActivate: [AuthGuard]*/},
 ];
 
 const config: ExtraOptions = {
-    useHash: true,
+  useHash: true,
 };
 
 @NgModule({
-    imports: [RouterModule.forRoot(routes, config)],
-    exports: [RouterModule]
+  imports: [RouterModule.forRoot(routes, config)],
+  exports: [RouterModule]
 })
 
 export class AppRoutingModule {
