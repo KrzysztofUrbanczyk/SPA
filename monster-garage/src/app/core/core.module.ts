@@ -5,7 +5,6 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AuthService } from './auth.service';
 import { NotifyService } from './notify.service';
-import { AuthGuardService } from './auth-guard.service';
 
 @NgModule({
   imports: [
@@ -16,8 +15,7 @@ import { AuthGuardService } from './auth-guard.service';
   declarations: [],
   providers: [
     AuthService,
-    NotifyService,
-    AuthGuardService
+    NotifyService
   ]
 })
 export class CoreModule {
