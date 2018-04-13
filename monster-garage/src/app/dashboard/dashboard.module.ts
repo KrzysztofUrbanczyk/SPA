@@ -9,10 +9,10 @@ import { ThemeModule } from '../@theme/theme.module';
   ],
   declarations: [DashboardComponent]
 })
-export class DashboardModule { }
+export class DashboardModule {
+}
 
-
-import {NbMenuItem} from '@nebular/theme';
+import { NbMenuItem } from '@nebular/theme';
 
 export const MENU_ITEMS: NbMenuItem[] = [
   {
