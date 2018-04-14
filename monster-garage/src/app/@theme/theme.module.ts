@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LayoutOneColumnComponent } from './layout/layout-one-column/layout-one-column.component';
 
-import { NbThemeModule, NbLayoutModule, NbSidebarModule, NbMenuModule, NbCardModule } from '@nebular/theme';
+import { NbThemeModule, NbLayoutModule, NbSidebarModule, NbMenuModule, NbCardModule, NbCheckboxModule } from '@nebular/theme';
 
 const BASE_MODULES = [CommonModule, FormsModule, ReactiveFormsModule];
 
@@ -11,7 +11,8 @@ const NB_MODULES = [
   NbCardModule,
   NbLayoutModule,
   NbSidebarModule,
-  NbMenuModule
+  NbMenuModule,
+  NbCheckboxModule
 ];
 
 const COMPONENTS = [
