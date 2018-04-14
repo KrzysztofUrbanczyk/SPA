@@ -1,3 +1,75 @@
-<p>
-  order-products works!
-</p>
+<nb-layout>
+  
+  
+    <nb-layout-column>
+      <div class="form col-lg-6">
+        <form>
+  
+          <div class="form-group">
+            <label for="category">Category</label>
+            <select class="form-control" id="category" [(ngModel)]="selectedCategory" name="selectedCategory">
+              <option *ngFor="let category of categories | async">{{category.name}}</option>
+            </select>
+          </div>
+          
+          <div class="linkElement">
+            <a href="#" data-toggle="collapse" data-target="#inputCategory">Add Category</a>
+          </div>
+  
+          <div id="inputCategory" class="collapse">
+            <div class="form-group">
+              <label for="newCategory">Ten Input powinien sie pojawic jezeli klikniemy "dodaj kategorie"</label>
+              <input type="text" class="form-control" id="newCategory" name="newCategory" [(ngModel)]="newCategory" required />
+            </div>
+            <div class="form-group text-center">
+              <button (click)="addNewCategory()" class="btn btn-success btn-block" data-toggle="collapse" data-target="#inputCategory">Wyslij</button>
+            </div>
+          </div>
+  
+          <div class="form-group">
+            <label for="category">productName</label>
+            <input type="text" class="form-control" id="productName" name="productName" [(ngModel)]="productName" required />
+          </div>
+  
+          <div class="form-group">
+            <label for="quantity">Quantity</label>
+            <input type="text" class="form-control" id="quantity" name="quantity" [(ngModel)]="quantity" required />
+          </div>
+  
+          <div class="form-group">
+            <label for="company">Company</label>
+            <select class="form-control" id="company" [(ngModel)]="selectedCompany" name="selectedCompany">
+              <option *ngFor="let company of companies | async">{{company.name}}</option>
+            </select>
+          </div>
+          
+          <div class="linkElement">
+            <a href="#" data-toggle="collapse" data-target="#inputCompany">Add Company</a>
+          </div>
+  
+          <div id="inputCompany" class="collapse">
+            <div class="form-group">
+              <label for="addCompany">Nazwa Firmy</label>
+              <input type="text" class="form-control" id="addNewCompany" name="addNewCompany" [(ngModel)]="newCompany" required />
+            </div>
+  
+            <div class="form-group">
+              <label for="companyEmail">Email</label>
+              <input type="text" class="form-control" id="addCompanyEmail" name="addCompanyEmail" [(ngModel)]="newCompanyEmail" required/>
+            </div>
+  
+            <div class="form-group text-center">
+              <button (click)="addNewCompany()" class="btn btn-success btn-block" data-toggle="collapse" data-target="#inputCompany">Wyslij companie</button>
+            </div>
+          </div>
+          <br/>
+          <div class="form-group text-center">
+            <button (click)="sendOrder()" class="btn btn-success btn-block">Wyslij</button>
+          </div>
+  
+        </form>
+      </div>
+  
+  
+    </nb-layout-column>
+  </nb-layout>
