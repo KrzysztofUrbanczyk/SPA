@@ -69,6 +69,7 @@ export class AuthService {
     return this.afAuth.auth.signInWithPopup(provider)
       .then((credential) => {
         this.updateUserData(credential.user);
+        this.router.navigateByUrl('/pages');
       });
   }
 

@@ -1,0 +1,9 @@
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.navigation {
+  font-size: 2.5rem;
+  text-decoration: none;
+}
