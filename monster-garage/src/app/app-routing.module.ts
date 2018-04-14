@@ -8,7 +8,7 @@ const routes: Routes = [
   {path: '', redirectTo: 'login', pathMatch: 'full'},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
-  {path: 'pages', loadChildren: 'app/pages/pages.module#PagesModule', /* canActivate: [AuthGuard] */},
+  {path: 'pages', loadChildren: 'app/pages/pages.module#PagesModule',  canActivate: [AuthGuard] },
 ];
 
 const config: ExtraOptions = {
