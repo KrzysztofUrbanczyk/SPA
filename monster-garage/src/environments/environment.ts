@@ -1,11 +1,11 @@
 export const environment = {
   production: false,
   firebase: {
-    apiKey: 'AIzaSyD3Y4zcLP2rpw-Qrh06stFxSyiY2Wx8xo0',
-    authDomain: 'monstergarage-4cdc9.firebaseapp.com',
-    databaseURL: 'https://monstergarage-4cdc9.firebaseio.com',
-    projectId: 'monstergarage-4cdc9',
-    storageBucket: '',
-    messagingSenderId: '877649468413'
+    apiKey: 'AIzaSyBXsuqslaQhnoiFd7J8nFFqINkYz9y5xzE',
+    authDomain: 'testets-49c73.firebaseapp.com',
+    databaseURL: 'https://testets-49c73.firebaseio.com',
+    projectId: 'testets-49c73',
+    storageBucket: 'testets-49c73.appspot.com',
+    messagingSenderId: '258182986797'
   }
 };
