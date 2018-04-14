@@ -11,14 +11,14 @@ import { Observable } from 'rxjs/Observable';
 })
 export class OrderProductsComponent implements OnInit {
 
-  public db: AngularFirestore;
   private owner: string;
   private newCategory: string;
   private newCompany: string;
   private newCompanyEmail: string;
 
-  public categories: Observable<{}>;
+  private categories: Observable<{}>;
   private companies: Observable<{}>;
+  private orders: Observable<{}>;
 
   private categoriesCollection: AngularFirestoreCollection<any>;
   private companiesCollection: AngularFirestoreCollection<any>;
@@ -37,7 +37,8 @@ export class OrderProductsComponent implements OnInit {
 
     this.categories = this.categoriesCollection.doc(this.owner).collection('Category').valueChanges();
     this.companies = this.companiesCollection.doc(this.owner).collection('Company').valueChanges();
-   }
+    this.orders = this.orderCollection.doc(this.owner).collection('Order').valueChanges();
+  }
 
   ngOnInit() {
   }
@@ -56,6 +57,7 @@ export class OrderProductsComponent implements OnInit {
   }
 
   sendOrder() {
+    console.log(this.selectedCategory);
     this.orderCollection.doc(this.owner).collection('Order').add({
       category: this.selectedCategory,
       product: this.productName,
