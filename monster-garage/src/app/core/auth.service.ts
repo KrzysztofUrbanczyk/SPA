@@ -13,7 +13,7 @@ interface User {
   uid: string;
   email: string;
   photoURL?: string;
-  displayName: string;
+  displayName?: string;
 }
 
 @Injectable()
@@ -37,10 +37,16 @@ export class AuthService {
   }
 
   signup(email: string, password: string, displayName: string) {
-    this.afAuth.auth.createUserWithEmailAndPassword(email, password, displayName)
+    this.afAuth.auth.createUserWithEmailAndPassword(email, password)
       .then((user) => {
         this.notify.update('Rejestracja przebiegła pomyślnie!', 'success');
-        return this.updateUserData(user);
+          const data: User = {
+              uid: user.uid,
+              email: user.email,
+              displayName: displayName
+          };
+
+          return this.afs.doc<User>(`users/${user.uid}`).set(data);
       })
       .catch(error => {
         this.handleError(error);
@@ -50,7 +56,6 @@ export class AuthService {
   emailLogin(email: string, password: string) {
     return this.afAuth.auth.signInWithEmailAndPassword(email, password)
       .then((user) => {
-        return this.updateUserData(user);
       })
       .catch(error => this.handleError(error));
   }
@@ -74,17 +79,18 @@ export class AuthService {
   }
 
   private updateUserData(user) {
-    const userRef: AngularFirestoreDocument<User> = this.afs.doc(`users/${user.uid}`);
+        const userRef: AngularFirestoreDocument<User> = this.afs.doc(`users/${user.uid}`);
 
-    const data: User = {
-      uid: user.uid,
-      email: user.email,
-      displayName: user.displayName,
-      photoURL: user.photoURL
-    };
+        const data: User = {
+            uid: user.uid,
+            email: user.email,
+            displayName: user.displayName,
+            photoURL: user.photoURL
+        };
 
-    return userRef.set(data);
+        return userRef.set(data);
   }
+
 
   private handleError(error) {
     console.log(error);
