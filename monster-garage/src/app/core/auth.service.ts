@@ -13,7 +13,7 @@ interface User {
   uid: string;
   email: string;
   photoURL?: string;
-  displayName?: string;
+  displayName: string;
 }
 
 @Injectable()
@@ -36,8 +36,8 @@ export class AuthService {
       });
   }
 
-  signup(email: string, password: string) {
-    this.afAuth.auth.createUserWithEmailAndPassword(email, password)
+  signup(email: string, password: string, displayName: string) {
+    this.afAuth.auth.createUserWithEmailAndPassword(email, password, displayName)
       .then((user) => {
         this.notify.update('Rejestracja przebiegła pomyślnie!', 'success');
         return this.updateUserData(user);
