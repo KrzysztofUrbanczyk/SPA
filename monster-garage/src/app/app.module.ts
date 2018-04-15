@@ -10,12 +10,13 @@ import { RegisterComponent } from './register/register.component';
 import { CoreModule } from './core/core.module';
 import { AuthGuard } from './core/auth.guard';
 import { ThemeModule } from './@theme/theme.module';
+import { UserProfileComponent } from './pages/forms/user-profile/user-profile.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,

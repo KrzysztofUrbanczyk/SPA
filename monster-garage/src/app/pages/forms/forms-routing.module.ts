@@ -3,14 +3,20 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { FormsComponent } from './forms.component';
 import { OrderComponent } from './order/order.component';
+import {UserProfileComponent} from './user-profile/user-profile.component';
 
 const routes: Routes = [{
   path: '',
   component: FormsComponent,
   children: [{
     path: 'order',
-    component: OrderComponent,
+    component: OrderComponent
+  },
+  {
+    path: 'profile',
+    component: UserProfileComponent,
   }],
+
 }];
 
 @NgModule({
@@ -27,5 +33,6 @@ export class FormsRoutingModule {
 
 export const routedComponents = [
   FormsComponent,
-  OrderComponent
+  OrderComponent,
+  UserProfileComponent
 ];

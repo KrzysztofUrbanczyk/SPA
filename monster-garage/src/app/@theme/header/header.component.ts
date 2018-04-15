@@ -11,7 +11,7 @@ import { AuthService } from '../../core/auth.service';
 export class HeaderComponent implements OnInit {
   user: any;
 
-  userMenu = [{ title: 'Profil', link: '/profile' }, { title: 'Wyloguj', link: '/login' }];
+  userMenu = [{ title: 'Profil', link: '/pages/forms/profile' }, { title: 'Wyloguj', link: '/login' }];
 
   constructor(private sidebarService: NbSidebarService,
     private menuService: NbMenuService,
