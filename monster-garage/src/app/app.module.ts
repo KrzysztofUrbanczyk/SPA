@@ -10,7 +10,7 @@ import { RegisterComponent } from './register/register.component';
 import { CoreModule } from './core/core.module';
 import { AuthGuard } from './core/auth.guard';
 import { ThemeModule } from './@theme/theme.module';
-import { UserProfileComponent } from './pages/forms/user-profile/user-profile.component';
+import { SimpleNotificationsModule } from 'angular2-notifications';
 
 @NgModule({
   declarations: [
@@ -24,6 +24,7 @@ import { UserProfileComponent } from './pages/forms/user-profile/user-profile.co
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
     CoreModule,
+    SimpleNotificationsModule.forRoot(),
     ThemeModule.forRoot()
   ],
   providers: [AuthGuard],
