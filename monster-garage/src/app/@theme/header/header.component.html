@@ -1,12 +1,13 @@
-<div>
-  <div class="logo">
-    <a (click)="toggleSidebar()" href="#" class="navigation">
-      <i class="nb-menu"></i>
-    </a>
-    <div>
-      <span>MonsterGarage</span>
-    </div>
-    <nb-action>
-        <nb-user [nbContextMenu]="userMenu" [name]="user?.displayName" [picture]="user?.photoURL"></nb-user>
-      </nb-action>
+<div class="logo">
+  <a (click)="toggleSidebar()" href="#" class="navigation">
+    <i class="nb-menu"></i>
+  </a>
+  <div>
+    <span>MonsterGarage</span>
   </div>
+  <div class="user-container">
+    <nb-action class="user">
+      <nb-user [nbContextMenu]="userMenu" [name]="user?.displayName" [picture]="user?.photoURL"></nb-user>
+    </nb-action>
+  </div>
+</div>
