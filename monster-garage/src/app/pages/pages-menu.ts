@@ -3,7 +3,8 @@ import { NbMenuItem } from '@nebular/theme';
 export const MENU_ITEMS: NbMenuItem[] = [
   {
     title: 'Deska rozdzielcza',
-    icon: 'fa fa-cog',
+    icon: 'nb-home',
+    link: '/pages/dashboard',
     home: true,
   },
   {
@@ -12,17 +13,22 @@ export const MENU_ITEMS: NbMenuItem[] = [
   },
   {
     title: 'Rozwijane',
-    icon: 'fa fa-arrow-down',
+    icon: 'nb-gear',
     children: [
       {
         title: 'Login',
         link: '/login',
-      },
-      {
-        title: 'Nie wiem czemu nie działają ikonki nebulara',
-        link: '/user',
-      },
-
+      }
     ],
   },
+  {
+    title: 'Formularze',
+    icon: 'nb-compose',
+    children:  [
+      {
+        title: 'Zlecenia',
+        link: '/pages/forms/order',
+      },
+    ],
+  }
 ];
