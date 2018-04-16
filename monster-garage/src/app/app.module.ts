@@ -11,12 +11,14 @@ import { CoreModule } from './core/core.module';
 import { AuthGuard } from './core/auth.guard';
 import { ThemeModule } from './@theme/theme.module';
 import { SimpleNotificationsModule } from 'angular2-notifications';
+import { LogoutComponent } from './logout/logout.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     RegisterComponent,
+    LogoutComponent,
   ],
   imports: [
     BrowserModule,

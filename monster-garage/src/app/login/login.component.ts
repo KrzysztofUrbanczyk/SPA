@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../core/auth.service';
 
@@ -7,7 +7,7 @@ import { AuthService } from '../core/auth.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit, AfterViewInit {
+export class LoginComponent implements OnInit {
   email: string;
   password: string;
   displayName: string;
@@ -18,10 +18,6 @@ export class LoginComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
 
-  }
-
-  ngAfterViewInit() {
-    this.authService.logout();
   }
 
   login() {
