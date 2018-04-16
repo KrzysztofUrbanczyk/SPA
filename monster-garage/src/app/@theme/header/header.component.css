@@ -8,14 +8,32 @@
     text-decoration: none;
 }
 
-.logo h1 {
+.logo-container {
     text-align: center;
-    font-size: 1rem;
+}
+
+.logo {
+    float: left;
 }
 
 .user {
     position: relative;
-    right: 5%;
     float: right;
     cursor: pointer;
+}
+
+@media screen and (max-width: 1200px) {
+    .logo {
+        float: none;
+    }
+
+    .logo-text {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .logo {
+        display: none;
+    }
 }
