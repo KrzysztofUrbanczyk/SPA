@@ -1,11 +1,13 @@
-<div class="logo">
-  <a (click)="toggleSidebar()" href="#" class="navigation">
-    <i class="nb-menu"></i>
-  </a>
-  <div>
-    <span>MonsterGarage</span>
-  </div>
-  <div class="user-container">
-    <nb-user class="user" [nbContextMenu]="userMenu" [name]="user?.displayName" [picture]="user?.photoURL"></nb-user>
-  </div>
+<div class="header col-12">
+    <div class="col-2">
+        <a (click)="toggleSidebar()" href="#" class="navigation">
+            <i class="nb-menu"></i>
+        </a>
+    </div>
+    <div class="logo col-8">
+        <h1>MonsterGarage</h1>
+    </div>
+    <div class="user-container col-2">
+        <nb-user class="user" [nbContextMenu]="userMenu" [name]="user?.displayName" [picture]="user?.photoURL"></nb-user>
+    </div>
 </div>
