@@ -1,0 +1,9 @@
+div.form {
+    padding: 25px;
+    border: 1px solid #999;
+    border-radius: 5px;
+}
+
+.linkElement {
+    text-align: center;
+}

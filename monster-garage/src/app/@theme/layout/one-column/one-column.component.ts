@@ -1,10 +1,10 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 
 @Component({
-  selector: 'app-layout-one-column',
-  templateUrl: './layout-one-column.component.html',
-  styles: [],
-  encapsulation: ViewEncapsulation.None
+  selector: 'app-one-column',
+  templateUrl: './one-column.component.html',
+  styleUrls: ['./one-column.component.css'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class LayoutOneColumnComponent implements OnInit {
 

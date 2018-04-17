@@ -10,6 +10,7 @@ import { AuthService } from '../core/auth.service';
 export class RegisterComponent implements OnInit {
   email: string;
   password: string;
+  displayName: string;
 
   constructor(public authService: AuthService,
               private router: Router) {
@@ -19,8 +20,8 @@ export class RegisterComponent implements OnInit {
   }
 
   register() {
-    this.authService.signup(this.email, this.password);
-    this.email = this.password = '';
+    this.authService.signup(this.email, this.password, this.displayName);
+    this.email = this.password = this.displayName = '';
     this.router.navigate(['login']);
   }
 }

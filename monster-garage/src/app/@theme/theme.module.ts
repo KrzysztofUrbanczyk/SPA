@@ -1,9 +1,22 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { LayoutOneColumnComponent } from './layout/layout-one-column/layout-one-column.component';
+import { LayoutOneColumnComponent } from './layout/one-column/one-column.component';
 
-import { NbThemeModule, NbLayoutModule, NbSidebarModule, NbMenuModule, NbCardModule, NbCheckboxModule } from '@nebular/theme';
+
+import { HeaderComponent } from './header/header.component';
+
+import {
+  NbThemeModule,
+  NbLayoutModule,
+  NbSidebarModule,
+  NbMenuModule,
+  NbCardModule,
+  NbCheckboxModule,
+  NbUserModule,
+  NbActionsModule,
+  NbContextMenuModule
+} from '@nebular/theme';
 
 const BASE_MODULES = [CommonModule, FormsModule, ReactiveFormsModule];
 
@@ -12,15 +25,19 @@ const NB_MODULES = [
   NbLayoutModule,
   NbSidebarModule,
   NbMenuModule,
-  NbCheckboxModule
+  NbCheckboxModule,
+  NbUserModule,
+  NbActionsModule,
+  NbContextMenuModule,
 ];
 
 const COMPONENTS = [
-  LayoutOneColumnComponent
+  LayoutOneColumnComponent,
+  HeaderComponent
 ];
 
 const NB_THEME_PROVIDERS = [
-  ...NbThemeModule.forRoot({name: 'default'}).providers,
+  ...NbThemeModule.forRoot({ name: 'default' }).providers,
   ...NbSidebarModule.forRoot().providers,
   ...NbMenuModule.forRoot().providers,
 ];
@@ -28,7 +45,7 @@ const NB_THEME_PROVIDERS = [
 @NgModule({
   imports: [...BASE_MODULES, ...NB_MODULES],
   exports: [...BASE_MODULES, ...NB_MODULES, ...COMPONENTS],
-  declarations: [...COMPONENTS]
+  declarations: [...COMPONENTS, HeaderComponent]
 })
 
 export class ThemeModule {
