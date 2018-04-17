@@ -1,0 +1,16 @@
+<div class="header col-12">
+    <div class="col-sm-4">
+        <a (click)="toggleSidebar()" href="#" class="navigation">
+            <i class="nb-menu"></i>
+        </a>
+    </div>
+
+    <div class="logo-container col-sm-4">
+        <img class="logo" src="/assets/images/logo.png" />
+        <h1 class="logo-text">MonsterGarage</h1>
+    </div>
+
+    <div class="user-container col-sm-4">
+        <nb-user class="user" [nbContextMenu]="userMenu" [name]="user?.displayName" [picture]="user?.photoURL"></nb-user>
+    </div>
+</div>

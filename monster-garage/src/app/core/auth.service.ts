@@ -22,9 +22,9 @@ export class AuthService {
   user: Observable<User>;
 
   constructor(private afAuth: AngularFireAuth,
-              private afs: AngularFirestore,
-              private router: Router,
-              private notify: NotifyService) {
+    private afs: AngularFirestore,
+    private router: Router,
+    private notify: NotifyService) {
 
     this.user = this.afAuth.authState
       .switchMap(user => {
@@ -36,11 +36,17 @@ export class AuthService {
       });
   }
 
-  signup(email: string, password: string) {
+  signup(email: string, password: string, displayName: string) {
     this.afAuth.auth.createUserWithEmailAndPassword(email, password)
       .then((user) => {
         this.notify.update('Rejestracja przebiegła pomyślnie!', 'success');
-        return this.updateUserData(user);
+        const data: User = {
+          uid: user.uid,
+          email: user.email,
+          displayName: displayName
+        };
+
+        return this.afs.doc<User>(`users/${user.uid}`).set(data);
       })
       .catch(error => {
         this.handleError(error);
@@ -49,9 +55,6 @@ export class AuthService {
 
   emailLogin(email: string, password: string) {
     return this.afAuth.auth.signInWithEmailAndPassword(email, password)
-      .then((user) => {
-        return this.updateUserData(user);
-      })
       .catch(error => this.handleError(error));
   }
 
@@ -69,6 +72,7 @@ export class AuthService {
     return this.afAuth.auth.signInWithPopup(provider)
       .then((credential) => {
         this.updateUserData(credential.user);
+        this.router.navigateByUrl('/pages');
       });
   }
 
@@ -84,6 +88,7 @@ export class AuthService {
 
     return userRef.set(data);
   }
+
 
   private handleError(error) {
     console.log(error);

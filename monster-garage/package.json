@@ -27,6 +27,7 @@
     "@angular/router": "^5.2.0",
     "@nebular/theme": "^2.0.0-rc.6",
     "angular-font-awesome": "^3.1.2",
+    "angular2-notifications": "^1.0.0",
     "angularfire2": "^5.0.0-rc.6.0",
     "bootstrap": "^4.1.0",
     "bootstrap-social": "^5.1.1",

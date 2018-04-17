@@ -29,6 +29,11 @@ export const MENU_ITEMS: NbMenuItem[] = [
         title: 'Zlecenia',
         link: '/pages/forms/order',
       },
+
+      {
+        title: 'Zamów produkt',
+        link: '/pages/forms/order-product',
+      },
     ],
   }
 ];
