@@ -26,11 +26,6 @@ export const MENU_ITEMS: NbMenuItem[] = [
     icon: 'nb-compose',
     children:  [
       {
-        title: 'Zlecenia',
-        link: '/pages/forms/order',
-      },
-
-      {
         title: 'Zamów produkt',
         link: '/pages/forms/order-product',
       },
