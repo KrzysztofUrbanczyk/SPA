@@ -12,12 +12,24 @@ export const MENU_ITEMS: NbMenuItem[] = [
     group: true,
   },
   {
-    title: 'Rozwijane',
+    title: 'Naprawy',
     icon: 'nb-gear',
     children: [
       {
-        title: 'Login',
-        link: '/login',
+        title: 'Dodaj zlecenie',
+        link: '#',
+      },
+      {
+        title: 'Do realizacji',
+        link: '#',
+      },
+      {
+        title: 'W trakcie',
+        link: '#',
+      },
+      {
+        title: 'Zrealizowane',
+        link: '#',
       }
     ],
   },
