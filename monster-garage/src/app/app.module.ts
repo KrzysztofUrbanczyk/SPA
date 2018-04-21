@@ -1,17 +1,17 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
-import { LoginComponent } from './login/login.component';
+import { LoginComponent } from './account/login/login.component';
 import { AppRoutingModule } from './app-routing.module';
 import { FormsModule } from '@angular/forms';
 import { AngularFireModule } from 'angularfire2';
 import { environment } from '../environments/environment';
-import { RegisterComponent } from './register/register.component';
+import { RegisterComponent } from './account/register/register.component';
 import { CoreModule } from './core/core.module';
 import { AuthGuard } from './core/auth.guard';
 import { ThemeModule } from './@theme/theme.module';
 import { SimpleNotificationsModule } from 'angular2-notifications';
-import { LogoutComponent } from './logout/logout.component';
+import { LogoutComponent } from './account/logout/logout.component';
 
 @NgModule({
   declarations: [
