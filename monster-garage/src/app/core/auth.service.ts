@@ -76,9 +76,9 @@ export class AuthService {
       });
   }
 
-  private updateUserData(user) {
+  public updateUserData(user) {
     const userRef: AngularFirestoreDocument<User> = this.afs.doc(`users/${user.uid}`);
-
+    this.notify.update('Aktualizacja udana!', 'success');
     const data: User = {
       uid: user.uid,
       email: user.email,
@@ -86,7 +86,6 @@ export class AuthService {
       photoURL: user.photoURL
     };
 
-    return userRef.set(data);
   }
 
 
