@@ -7,3 +7,31 @@ div.form {
 .linkElement {
     text-align: center;
 }
+
+.temp-suc {
+    border-left: 4px solid #42A948; /* green */
+  }
+
+.temp-suc:focus {
+    border-left: 4px solid #42A948; /* green */
+
+}
+  
+.temp-notsuc{
+    border-left: 4px solid #a94442; /* red */
+ }
+
+  .temp-notsuc:focus{
+    border-left: 4px solid #a94442; /* red */
+  }
+
+.form-control:focus {
+    border-color: #dadfe6;
+}
+
+.alert-rectangle {
+    text-align: right;
+    margin-top: -34px;
+    margin-right: 15px;
+    font-size: 12px;
+}
