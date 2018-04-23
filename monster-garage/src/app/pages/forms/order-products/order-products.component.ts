@@ -1,4 +1,5 @@
 
+
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NbMenuItem } from '@nebular/theme';
@@ -38,6 +39,7 @@ export class OrderProductsComponent implements OnInit {
   password: FormControl;
   categoryControl: FormControl;
   categorySelectControl: FormControl;
+  companySelectControl: FormControl;
 
   disabledControl: boolean;
   public elo: string;
@@ -82,6 +84,10 @@ export class OrderProductsComponent implements OnInit {
       Validators.required,
       Validators.minLength(1)
     ]);
+    this.companySelectControl = new FormControl('', [
+      Validators.required,
+      Validators.minLength(1)
+    ]);
   }
 
   createForm() {
@@ -89,9 +95,10 @@ export class OrderProductsComponent implements OnInit {
       categorySelectControl: this.categorySelectControl,
       productNameControl: this.productNameControl,
       quantityControl: this.quantityControl,
-      email: this.email,
-      password: this.password,
-      language: this.categoryControl
+      companySelectControl: this.companySelectControl
+    //  email: this.email,
+  //    password: this.password,
+//      language: this.categoryControl
     });
   }
 
@@ -112,18 +119,24 @@ export class OrderProductsComponent implements OnInit {
     console.log(this.selectedCategory);
     console.log('gdsfsF' + this.quantityControl.status + ' ' + this.email.status + ' ' +
       this.productNameControl.status + ' ');
-      console.log('gdsfsF' + this.selectedCategory);
+      console.log('gdsfsF' + this.categorySelectControl.status);
       console.log('gdsfsF' + this.productName); // trzeba usunac z taga form ten heroform i my form oraz required przed tagu select
       console.log('gdsfsF' + this.selectedCompany);
       this.sendIsClicked = true;
 
-      this.orderCollection.doc(this.owner).collection('Order').add({
-      category: this.selectedCategory,
-      product: this.productName,
-      quantity: this.quantity,
-      company: this.selectedCompany
-    });
-  }
-
+      if (this.categorySelectControl.status === 'VALID'
+       && this.productNameControl.status === 'VALID'
+       && this.quantityControl.status === 'VALID') {
+       // this.orderCollection.doc(this.owner).collection('Order').add({
+       // category: this.selectedCategory,
+       // product: this.productName,
+       // quantity: this.quantity,
+       // company: this.selectedCompany
+       console.log('Dodaje ========= ');
+       console.log('Kategoria: ' + this.selectedCategory);
+       console.log('Product/name: ' + this.productName);
+       console.log('Ilosc: ' + this.quantity);
+       console.log('Kontrahent: ' + this.selectedCompany);
+      } // );
+    }
 }
-
