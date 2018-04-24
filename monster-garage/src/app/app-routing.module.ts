@@ -10,7 +10,7 @@ const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'logout', component: LogoutComponent},
   {path: 'register', component: RegisterComponent},
-  {path: 'pages', loadChildren: 'app/pages/pages.module#PagesModule', /* canActivate: [AuthGuard]*/ },
+  {path: 'pages', loadChildren: 'app/pages/pages.module#PagesModule', canActivate: [AuthGuard]},
 ];
 
 const config: ExtraOptions = {
