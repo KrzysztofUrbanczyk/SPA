@@ -5,7 +5,7 @@
           Musze poprawic wybieranie domyslnego selecta</h3>
       <h3>Wiecej info na trello</h3>
     <div class="form col-lg-6">
-      <form (ngSubmit)="sendOrder()" #heroForm="ngForm" [formGroup] = "myform">
+      <form [formGroup] = "myform">
         {{diagnostic}}
         
         <!--/////////KATEGORIA-->
@@ -22,30 +22,31 @@
         </div>
 
                         <!--/////////AddKategoria link dodaj kategorie-->
-<!--
+
         
         <div class="linkElement">
           <a href="#" data-toggle="collapse" data-target="#inputCategory">Add Category</a>
         </div>
--->
                
         <!--/////////Nazwa kategori Collapse-->
 
-<!--
+
         <div id="inputCategory" class="collapse">
           <div class="form-group">
             <label for="newCategory">Ten Input powinien sie pojawic jezeli klikniemy "dodaj kategorie"</label>
-            <input type="text" class="form-control" id="newCategory" name="newCategory" [(ngModel)]="newCategory" required />
+            <input type="text" class="form-control" id="newCategory" name="newCategory"
+             formControlName="newCategoryNameControl" [(ngModel)]="newCategory" required />
           </div>
--->
+
                         <!--/////////Przycisk do wyslania kategori-->
 
-<!--
+
           <div class="form-group text-center">
-            <button (click)="addNewCategory()" class="btn btn-success btn-block" data-toggle="collapse" data-target="#inputCategory">Wyslij</button>
+            <button (click)="addNewCategory()" class="btn btn-success btn-block" data-toggle="collapse" 
+            data-target="#inputCategory" [disabled] = "!isNewCategoryCorrect()">Wyslij</button>
           </div>
         </div>
--->
+
                       <!--/////////Nazwa produkty-->
 
 
@@ -82,38 +83,42 @@
         </div>
         
                       <!--/////////Link do dodania kompani-->
- <!--
+ 
         <div class="linkElement">
           <a href="#" data-toggle="collapse" data-target="#inputCompany">Add Company</a>
         </div>-->
-       <!--  -->
+       
                       <!--/////////NazwA fIRMY Collapse-->
- <!--
+ 
         <div id="inputCompany" class="collapse">
           <div class="form-group">
             <label for="addCompany">Nazwa Firmy</label>
-            <input type="text" class="form-control" id="addNewCompany" name="addNewCompany" [(ngModel)]="newCompany" required />
+            <input type="text" class="form-control" id="addNewCompany" name="addNewCompany" 
+            formControlName="newCompanyNameControl" [(ngModel)]="newCompany" required />
           </div>
-          -->
+    
                         <!--/////////Email collapse-->
- <!--
+ 
           <div class="form-group">
             <label for="companyEmail">Email</label>
-            <input type="text" class="form-control" id="addCompanyEmail" name="addCompanyEmail" [(ngModel)]="newCompanyEmail" required/>
-          </div>-->
+            <input type="text" class="form-control" id="addCompanyEmail" name="addCompanyEmail" 
+            formControlName="email" [(ngModel)]="newCompanyEmail" required/>
+          </div>
                         <!--/////////Przeycisk do dodania firmy-->
- <!--
+ 
           <div class="form-group text-center">
-            <button (click)="addNewCompany()" class="btn btn-success btn-block" data-toggle="collapse" data-target="#inputCompany">Dodaj companie</button>
+            <button (click)="addNewCompany()" class="btn btn-success btn-block" data-toggle="collapse" 
+            data-target="#inputCompany" 
+            [disabled] = "!isNewCompanyCorrect()">Dodaj companie</button>
           </div>
         </div>
 
--->
+
         <br/> 
                       <!--/////////Przycisk do wyslania zamowianie-->
 
         <div class="form-group text-center">
-          <button type="submit" class="btn btn-success" >Submit</button>
+          <button (click)="sendOrder()" type="submit" class="btn btn-success" >Submit</button>
         </div>
 
         

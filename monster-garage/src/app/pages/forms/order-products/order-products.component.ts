@@ -40,12 +40,20 @@ export class OrderProductsComponent implements OnInit {
   categoryControl: FormControl;
   categorySelectControl: FormControl;
   companySelectControl: FormControl;
+  newCategoryNameControl: FormControl;
+  newCompanyNameControl: FormControl;
 
   disabledControl: boolean;
   public elo: string;
   sendIsClicked: boolean;
+  sendCategoryIsClicked: boolean;
+  addCompanyIsClicked: boolean;
+
   constructor(db: AngularFirestore) {
     this.sendIsClicked = false;
+    this.sendCategoryIsClicked = false;
+    this.addCompanyIsClicked = false;
+
     this.elo = 'fds';
     this.owner = 'root';
     this.categoriesCollection = db.collection('Categories');
@@ -63,6 +71,10 @@ export class OrderProductsComponent implements OnInit {
   }
 
   createFormControls() {
+    this.categorySelectControl = new FormControl('', [
+      Validators.required,
+      Validators.minLength(1)
+    ]);
     this.productNameControl = new FormControl('', [
       Validators.required,
       Validators.minLength(5)
@@ -71,22 +83,21 @@ export class OrderProductsComponent implements OnInit {
       Validators.required,
       Validators.pattern('[0-9]+')
     ]);
+    this.companySelectControl = new FormControl('', [
+      Validators.required,
+      Validators.minLength(1)
+    ]);
+    this.newCategoryNameControl = new FormControl('', [
+      Validators.required,
+      Validators.minLength(3)
+    ]);
     this.email = new FormControl('', [
       Validators.required,
       Validators.pattern('[^ @]*@[^ @]*')
     ]);
-    this.password = new FormControl('', [
+    this.newCompanyNameControl = new FormControl('', [
       Validators.required,
-      Validators.minLength(8)
-    ]);
-    this.categoryControl = new FormControl('');
-    this.categorySelectControl = new FormControl('', [
-      Validators.required,
-      Validators.minLength(1)
-    ]);
-    this.companySelectControl = new FormControl('', [
-      Validators.required,
-      Validators.minLength(1)
+      Validators.minLength(3)
     ]);
   }
 
@@ -95,24 +106,43 @@ export class OrderProductsComponent implements OnInit {
       categorySelectControl: this.categorySelectControl,
       productNameControl: this.productNameControl,
       quantityControl: this.quantityControl,
-      companySelectControl: this.companySelectControl
-    //  email: this.email,
+      companySelectControl: this.companySelectControl,
+      newCategoryNameControl: this.newCategoryNameControl,
+      email: this.email,
+      newCompanyNameControl: this.newCompanyNameControl
   //    password: this.password,
 //      language: this.categoryControl
     });
   }
 
   addNewCategory() {
-    this.categoriesCollection.doc(this.owner).collection('Category').doc(this.newCategory).set({
-      name: this.newCategory
-    });
+    if (this.isNewCategoryCorrect()) {
+      this.categoriesCollection.doc(this.owner).collection('Category').doc(this.newCategory).set({
+        name: this.newCategory
+      });
+    }
   }
 
   addNewCompany() {
-    this.companiesCollection.doc(this.owner).collection('Company').doc(this.newCompany).set({
-       name: this.newCompany,
-       eMail: this.newCompanyEmail
-    });
+    if (this.isNewCompanyCorrect()) {
+      this.companiesCollection.doc(this.owner).collection('Company').doc(this.newCompany).set({
+        name: this.newCompany,
+        eMail: this.newCompanyEmail
+     });
+    }
+  }
+
+  isNewCompanyCorrect() {
+    return this.newCompanyNameControl.valid && this.email.valid;
+  }
+
+  isNewCategoryCorrect() {
+    return this.newCategoryNameControl.valid;
+  }
+
+  isOrderCorrect() {
+    return this.categorySelectControl.status === 'VALID' && this.productNameControl.status === 'VALID'
+    && this.quantityControl.status === 'VALID' && this.companySelectControl.status === 'VALID';
   }
 
   sendOrder() {
@@ -124,9 +154,7 @@ export class OrderProductsComponent implements OnInit {
       console.log('gdsfsF' + this.selectedCompany);
       this.sendIsClicked = true;
 
-      if (this.categorySelectControl.status === 'VALID'
-       && this.productNameControl.status === 'VALID'
-       && this.quantityControl.status === 'VALID') {
+      if (this.isOrderCorrect()) {
        // this.orderCollection.doc(this.owner).collection('Order').add({
        // category: this.selectedCategory,
        // product: this.productName,
