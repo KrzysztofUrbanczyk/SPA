@@ -48,11 +48,13 @@ export class OrderProductsComponent implements OnInit {
   sendIsClicked: boolean;
   sendCategoryIsClicked: boolean;
   addCompanyIsClicked: boolean;
+  wasSend: boolean;
 
   constructor(db: AngularFirestore) {
     this.sendIsClicked = false;
     this.sendCategoryIsClicked = false;
     this.addCompanyIsClicked = false;
+    this.wasSend = true;
 
     this.elo = 'fds';
     this.owner = 'root';
@@ -120,6 +122,7 @@ export class OrderProductsComponent implements OnInit {
       this.categoriesCollection.doc(this.owner).collection('Category').doc(this.newCategory).set({
         name: this.newCategory
       });
+      this.newCategoryNameControl.setValue('    ');
     }
   }
 
@@ -130,6 +133,15 @@ export class OrderProductsComponent implements OnInit {
         eMail: this.newCompanyEmail
      });
     }
+  }
+
+  clearNewCategoryInput() {
+    this.newCategoryNameControl.setValue('');
+  }
+
+  clearNewCompanyInputs() {
+    this.newCompanyNameControl.setValue('');
+    this.email.setValue('');
   }
 
   isNewCompanyCorrect() {
@@ -165,6 +177,8 @@ export class OrderProductsComponent implements OnInit {
        console.log('Product/name: ' + this.productName);
        console.log('Ilosc: ' + this.quantity);
        console.log('Kontrahent: ' + this.selectedCompany);
+       this.sendIsClicked = false;
+       this.myform.reset();
       } // );
     }
 }
