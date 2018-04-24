@@ -1,5 +1,3 @@
-
-
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NbMenuItem } from '@nebular/theme';
@@ -32,31 +30,19 @@ export class OrderProductsComponent implements OnInit {
   private productName: string;
   private quantity: string;
 
-  myform: FormGroup;
-  productNameControl: FormControl;
-  quantityControl: FormControl;
-  email: FormControl;
-  password: FormControl;
-  categoryControl: FormControl;
-  categorySelectControl: FormControl;
-  companySelectControl: FormControl;
-  newCategoryNameControl: FormControl;
-  newCompanyNameControl: FormControl;
+  private orderProductForm: FormGroup;
 
-  disabledControl: boolean;
-  public elo: string;
-  sendIsClicked: boolean;
-  sendCategoryIsClicked: boolean;
-  addCompanyIsClicked: boolean;
-  wasSend: boolean;
+  private categorySelectControl: FormControl;
+  private newCategoryNameControl: FormControl;
+  private productNameControl: FormControl;
+  private quantityControl: FormControl;
+  private companySelectControl: FormControl;
+  private newCompanyEmailControl: FormControl;
+  private newCompanyNameControl: FormControl;
+
+  private sendOrderIsClicked: boolean;
 
   constructor(db: AngularFirestore) {
-    this.sendIsClicked = false;
-    this.sendCategoryIsClicked = false;
-    this.addCompanyIsClicked = false;
-    this.wasSend = true;
-
-    this.elo = 'fds';
     this.owner = 'root';
     this.categoriesCollection = db.collection('Categories');
     this.companiesCollection = db.collection('Companies');
@@ -77,6 +63,10 @@ export class OrderProductsComponent implements OnInit {
       Validators.required,
       Validators.minLength(1)
     ]);
+    this.newCategoryNameControl = new FormControl('', [
+      Validators.required,
+      Validators.minLength(3)
+    ]);
     this.productNameControl = new FormControl('', [
       Validators.required,
       Validators.minLength(5)
@@ -89,11 +79,7 @@ export class OrderProductsComponent implements OnInit {
       Validators.required,
       Validators.minLength(1)
     ]);
-    this.newCategoryNameControl = new FormControl('', [
-      Validators.required,
-      Validators.minLength(3)
-    ]);
-    this.email = new FormControl('', [
+    this.newCompanyEmailControl = new FormControl('', [
       Validators.required,
       Validators.pattern('[^ @]*@[^ @]*')
     ]);
@@ -104,16 +90,14 @@ export class OrderProductsComponent implements OnInit {
   }
 
   createForm() {
-    this.myform = new FormGroup({
+    this.orderProductForm = new FormGroup({
       categorySelectControl: this.categorySelectControl,
+      newCategoryNameControl: this.newCategoryNameControl,
       productNameControl: this.productNameControl,
       quantityControl: this.quantityControl,
       companySelectControl: this.companySelectControl,
-      newCategoryNameControl: this.newCategoryNameControl,
-      email: this.email,
+      newCompanyEmailControl: this.newCompanyEmailControl,
       newCompanyNameControl: this.newCompanyNameControl
-  //    password: this.password,
-//      language: this.categoryControl
     });
   }
 
@@ -122,7 +106,6 @@ export class OrderProductsComponent implements OnInit {
       this.categoriesCollection.doc(this.owner).collection('Category').doc(this.newCategory).set({
         name: this.newCategory
       });
-      this.newCategoryNameControl.setValue('    ');
     }
   }
 
@@ -141,11 +124,11 @@ export class OrderProductsComponent implements OnInit {
 
   clearNewCompanyInputs() {
     this.newCompanyNameControl.setValue('');
-    this.email.setValue('');
+    this.newCompanyEmailControl.setValue('');
   }
 
   isNewCompanyCorrect() {
-    return this.newCompanyNameControl.valid && this.email.valid;
+    return this.newCompanyNameControl.valid && this.newCompanyEmailControl.valid;
   }
 
   isNewCategoryCorrect() {
@@ -158,27 +141,16 @@ export class OrderProductsComponent implements OnInit {
   }
 
   sendOrder() {
-    console.log(this.selectedCategory);
-    console.log('gdsfsF' + this.quantityControl.status + ' ' + this.email.status + ' ' +
-      this.productNameControl.status + ' ');
-      console.log('gdsfsF' + this.categorySelectControl.status);
-      console.log('gdsfsF' + this.productName); // trzeba usunac z taga form ten heroform i my form oraz required przed tagu select
-      console.log('gdsfsF' + this.selectedCompany);
-      this.sendIsClicked = true;
-
+    this.sendOrderIsClicked = true;
       if (this.isOrderCorrect()) {
-       // this.orderCollection.doc(this.owner).collection('Order').add({
-       // category: this.selectedCategory,
-       // product: this.productName,
-       // quantity: this.quantity,
-       // company: this.selectedCompany
-       console.log('Dodaje ========= ');
-       console.log('Kategoria: ' + this.selectedCategory);
-       console.log('Product/name: ' + this.productName);
-       console.log('Ilosc: ' + this.quantity);
-       console.log('Kontrahent: ' + this.selectedCompany);
-       this.sendIsClicked = false;
-       this.myform.reset();
-      } // );
+        this.orderCollection.doc(this.owner).collection('Order').add({
+        category: this.selectedCategory,
+        product: this.productName,
+        quantity: this.quantity,
+        company: this.selectedCompany
+      });
+      this.sendOrderIsClicked = false;
+      this.orderProductForm.reset();
     }
+  }
 }

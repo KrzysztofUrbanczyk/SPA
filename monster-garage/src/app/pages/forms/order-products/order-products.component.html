@@ -1,126 +1,92 @@
 <nb-layout>      
   <nb-layout-column>
-      <h1>UWAGA</h1>
-      <h3>żeby działało to w tej chwili trzeba dodac min 2 kategorie i min 2 firmy. Nastepnie trzeba wybrac ze selecta ta druga firme, zeby warotsc taga selected sie zmieniła. 
-          Musze poprawic wybieranie domyslnego selecta</h3>
-      <h3>Wiecej info na trello</h3>
     <div class="form col-lg-6">
-      <form [formGroup] = "myform">
-        {{diagnostic}}
-        
-        <!--/////////KATEGORIA-->
-
+      <form [formGroup] = "orderProductForm">        
         <div class="form-group">
           <label for="category">Kategoria</label>
-          <select class="form-control" id="category"  [(ngModel)]="selectedCategory" formControlName="categorySelectControl" name="category"  [ngClass]="{
-            'temp-notsuc': categorySelectControl.invalid && sendIsClicked,
-            'temp-suc': categorySelectControl.valid && sendIsClicked
-          }" required>
+          <select class="form-control" id="category" name="category" formControlName="categorySelectControl"
+           [(ngModel)]="selectedCategory" [ngClass]="{
+            'incorrect-data': categorySelectControl.invalid && sendOrderIsClicked,
+            'correct-data': categorySelectControl.valid && sendOrderIsClicked
+            }" required>
             <option [ngValue]="null">Wybierz kategorię</option>
             <option *ngFor="let category of categories | async">{{category.name}}</option>
           </select>
         </div>
-
-                        <!--/////////AddKategoria link dodaj kategorie-->
-
         
         <div class="linkElement">
           <a href="#" (click)="clearNewCategoryInput()" data-toggle="collapse" data-target="#inputCategory">Dodaj kategorię</a>
         </div>
-               
-        <!--/////////Nazwa kategori Collapse-->
-
 
         <div id="inputCategory" class="collapse">
           <div class="form-group">
             <label for="newCategory">Nazwa</label>
-            <input type="text" class="form-control" id="newCategory" name="newCategory"
-             formControlName="newCategoryNameControl" [(ngModel)]="newCategory" 
-             placeholder = "Nazwa musi się składać z minimum 3 znaków" 
-             onfocus = "this.value=''" required />
+            <input type="text" class="form-control" id="newCategory" name="newCategory" formControlName="newCategoryNameControl" 
+            placeholder = "Nazwa musi się składać z minimum 3 znaków" [(ngModel)]="newCategory" 
+            required />
           </div>
-
-                        <!--/////////Przycisk do wyslania kategori-->
-
-
           <div class="form-group text-center">
             <button (click)="addNewCategory()" class="btn btn-success btn-block" data-toggle="collapse" 
-            data-target="#inputCategory" [disabled] = "!isNewCategoryCorrect()">DODAJ !</button>
+            data-target="#inputCategory" [disabled]="!isNewCategoryCorrect()">DODAJ !</button>
           </div>
         </div>
 
-                      <!--/////////Nazwa produkty-->
-
-
         <div class="form-group">
           <label for="productName">Nazwa produktu</label>
-          <input type="text" class="form-control" id="productName" name="productName" [(ngModel)]="productName" formControlName="productNameControl" [ngClass]="{
-            'temp-notsuc': productNameControl.invalid && sendIsClicked,
-            'temp-suc': productNameControl.valid && sendIsClicked
-       }" placeholder="Minimalna ilość znaków: 5" required />
+          <input type="text" class="form-control" id="productName" name="productName" formControlName="productNameControl" 
+          placeholder="Minimalna ilość znaków: 5" [(ngModel)]="productName" [ngClass]="{
+            'incorrect-data': productNameControl.invalid && sendOrderIsClicked,
+            'correct-data': productNameControl.valid && sendOrderIsClicked
+          }" required />
         </div>
        
         <div class="form-group">
           <label for="quantity">Ilość</label>
-          <input type="text" class="form-control" id="quantity" name="quantity" [(ngModel)]="quantity" formControlName="quantityControl" [ngClass]="{
-            'temp-notsuc': quantityControl.invalid && sendIsClicked,
-            'temp-suc': quantityControl.valid && sendIsClicked
-       }" required />
-       </div>
-
-                    <!--/////////Company Selectbox-->
+          <input type="text" class="form-control" id="quantity" name="quantity" formControlName="quantityControl"
+          [(ngModel)]="quantity" [ngClass]="{
+            'incorrect-data': quantityControl.invalid && sendOrderIsClicked,
+            'correct-data': quantityControl.valid && sendOrderIsClicked
+           }" required />
+        </div>
  
         <div class="form-group">
           <label for="company">Kontrahent</label>
-          <select class="form-control" id="company" [(ngModel)]="selectedCompany" name="company" formControlName="companySelectControl" [ngClass]="{
-            'temp-notsuc': companySelectControl.invalid && sendIsClicked,
-            'temp-suc': companySelectControl.valid && sendIsClicked
-       }" required>
-            <option [ngValue]="null" hidden>Wybierz kontrahenta</option>
+          <select class="form-control" id="company" name="company" formControlName="companySelectControl" 
+          [(ngModel)]="selectedCompany" [ngClass]="{
+            'incorrect-data': companySelectControl.invalid && sendOrderIsClicked,
+            'correct-data': companySelectControl.valid && sendOrderIsClicked
+           }" required>
+            <option [ngValue]="null">Wybierz kontrahenta</option>
             <option *ngFor="let company of companies | async">{{company.name}}</option>
           </select> 
         </div>
-        
-                      <!--/////////Link do dodania kompani-->
- 
+         
         <div class="linkElement">
-          <a href="#" (click)="clearNewCompanyInputs()" data-toggle="collapse" data-target="#inputCompany">Add Company</a>
-        </div>-->
-       
-                      <!--/////////NazwA fIRMY Collapse-->
- 
+          <a href="#" (click)="clearNewCompanyInputs()" data-toggle="collapse" data-target="#inputCompany">Dodaj kontrahenta</a>
+        </div>
+        
         <div id="inputCompany" class="collapse">
           <div class="form-group">
-            <label for="addCompany">Nazwa Firmy</label>
+            <label for="addNewCompany">Nazwa kontrahenta</label>
             <input type="text" class="form-control" id="addNewCompany" name="addNewCompany" 
             formControlName="newCompanyNameControl" [(ngModel)]="newCompany" required />
-          </div>
-    
-                        <!--/////////Email collapse-->
- 
+          </div> 
           <div class="form-group">
-            <label for="companyEmail">Email</label>
+            <label for="addCompanyEmail">Email</label>
             <input type="text" class="form-control" id="addCompanyEmail" name="addCompanyEmail" 
-            formControlName="email" [(ngModel)]="newCompanyEmail" required/>
+            formControlName="newCompanyEmailControl" [(ngModel)]="newCompanyEmail" required/>
           </div>
-                        <!--/////////Przeycisk do dodania firmy-->
  
           <div class="form-group text-center">
             <button (click)="addNewCompany()" class="btn btn-success btn-block" data-toggle="collapse" 
-            data-target="#inputCompany" 
-            [disabled] = "!isNewCompanyCorrect()">Dodaj companie</button>
+            data-target="#inputCompany" [disabled] = "!isNewCompanyCorrect()">Dodaj kontrahenta</button>
           </div>
         </div>
-
-
         <br/> 
-                      <!--/////////Przycisk do wyslania zamowianie-->
 
         <div class="form-group text-center">
-          <button (click)="sendOrder()" type="submit" class="btn btn-success" >Submit</button>
+          <button (click)="sendOrder()" type="submit" class="btn btn-success" >Wyślij zamówienie</button>
         </div>
-
-        
       </form>
     </div>
 
@@ -134,9 +100,7 @@
         <h1>Co do zrobienia:</h1>
         <h2>Dosyc wazne</h2> 
          - Pobrac dane zalogowanego uzytkownika w celu przypisywania zamowien do niego. W tej chwili jest zahardcodowany 'root' i dla niego ida wszystkie zamowianie.<br/>
-         - Poprawic dodawanie domyslnych wartosci w przypadku gdy z selecta sie nic nie wybierze<br/>
          - Poprawic wyglad, byc moze uzyc tego nebulara.<br/>
-         - Wymuszenie wpisu w kazdym polu <br/>
          - funckja wysylajaca maila. W tej chwili tylko dodaje na bazie zamowienie <br/>
 
          <h3>Plany na przyszlość:</h3>
