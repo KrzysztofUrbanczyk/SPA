@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
+import { CurrentDateService } from '../../core/current-date.service';
 
 @Component({
   selector: 'app-repairs',
@@ -12,7 +13,7 @@ export class RepairsComponent implements OnInit {
   private car: string;
   private plates: string;
   private comment: string;
-  private createdAt = new Date();
+  private createdAt = new CurrentDateService().getCurrentFormattedDate();
   private deadline: string;
 
   private repairsCollection: AngularFirestoreCollection<any>;
