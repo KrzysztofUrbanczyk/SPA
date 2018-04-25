@@ -1,0 +1,13 @@
+<nb-layout>
+    <nb-layout-column>
+        <form>
+            <div class="form-group">
+                <label for="customerName">Nazwa uzytkownika</label>
+                <input type="text" class="form-control" id="customerName" name="customerName" [(ngModel)]="customerName" required />
+            </div>
+            <div class="form-group text-center">
+                <button (click)="addRepair()" class="btn btn-success btn-block">Dodaj zlecenie</button>
+            </div>
+        </form>
+    </nb-layout-column>
+</nb-layout>

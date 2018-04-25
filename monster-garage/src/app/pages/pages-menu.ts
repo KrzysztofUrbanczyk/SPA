@@ -17,7 +17,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
     children: [
       {
         title: 'Dodaj zlecenie',
-        link: '#',
+        link: '/pages/repairs',
       },
       {
         title: 'Do realizacji',

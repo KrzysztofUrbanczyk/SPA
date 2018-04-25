@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { PagesComponent } from './pages.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { RepairsComponent } from "./repairs/repairs.component";
 
 const routes: Routes = [{
   path: '',
@@ -15,6 +16,10 @@ const routes: Routes = [{
     {
       path: 'forms',
       loadChildren: './forms/forms.module#FormsModule',
+    },
+    {
+      path: 'repairs',
+      component: RepairsComponent,
     },
     {
       path: '',

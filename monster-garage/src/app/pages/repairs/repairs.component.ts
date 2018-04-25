@@ -6,13 +6,13 @@ import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-repairs',
-  template: '',
+  templateUrl: './repairs.component.html',
   styles: []
 })
 
 export class RepairsComponent implements OnInit {
-  repairs: Observable<Repairs[]>;
   private repairsCollection: AngularFirestoreCollection<Repairs>;
+  repairs: Observable<Repairs[]>;
 
   constructor(private afs: AngularFirestore) {
     this.repairsCollection = afs.collection<Repairs>('repairs');
@@ -22,4 +22,8 @@ export class RepairsComponent implements OnInit {
   ngOnInit() {
   }
 
+  private addRepair(repair) {
+    this.repairsCollection.add(repair);
+    console.log('Dodane!');
+  }
 }
