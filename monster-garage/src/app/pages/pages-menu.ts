@@ -20,17 +20,9 @@ export const MENU_ITEMS: NbMenuItem[] = [
         link: '/pages/repairs',
       },
       {
-        title: 'Do realizacji',
-        link: '#',
+        title: 'Lista napraw',
+        link: '/pages/show-repairs',
       },
-      {
-        title: 'W trakcie',
-        link: '#',
-      },
-      {
-        title: 'Zrealizowane',
-        link: '#',
-      }
     ],
   },
   {
