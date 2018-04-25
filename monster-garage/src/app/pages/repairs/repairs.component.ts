@@ -12,7 +12,8 @@ export class RepairsComponent implements OnInit {
   private car: string;
   private plates: string;
   private comment: string;
-  private status: string;
+  private createdAt = new Date();
+  private deadline: string;
 
   private repairsCollection: AngularFirestoreCollection<any>;
 
@@ -31,7 +32,9 @@ export class RepairsComponent implements OnInit {
       car: this.car,
       plates: this.plates,
       comment: this.comment,
-      status: this.status,
+      status: 'Do realizacji',
+      createdAt: this.createdAt,
+      deadline: this.deadline,
     });
   }
 
