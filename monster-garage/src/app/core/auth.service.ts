@@ -24,7 +24,7 @@ export class AuthService {
   constructor(private afAuth: AngularFireAuth,
     private afs: AngularFirestore,
     private router: Router,
-    private notify: NotifyService) {
+    public notify: NotifyService) {
 
     this.user = this.afAuth.authState
       .switchMap(user => {
@@ -50,6 +50,7 @@ export class AuthService {
       })
       .catch(error => {
         this.handleError(error);
+        return false;
       });
   }
 
@@ -89,7 +90,7 @@ export class AuthService {
   }
 
 
-  private handleError(error) {
+  public handleError(error) {
     console.log(error);
     this.notify.update(error.message, 'error');
   }
