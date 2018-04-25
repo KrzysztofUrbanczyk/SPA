@@ -1,8 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection } from 'angularfire2/firestore';
-import { Repairs } from './repairs';
-import { Observable } from 'rxjs/Observable';
-
+import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 
 @Component({
   selector: 'app-repairs',
@@ -11,19 +8,31 @@ import { Observable } from 'rxjs/Observable';
 })
 
 export class RepairsComponent implements OnInit {
-  private repairsCollection: AngularFirestoreCollection<Repairs>;
-  repairs: Observable<Repairs[]>;
+  private customerName: string;
+  private car: string;
+  private plates: string;
+  private comment: string;
+  private status: string;
+
+  private repairsCollection: AngularFirestoreCollection<any>;
 
   constructor(private afs: AngularFirestore) {
-    this.repairsCollection = afs.collection<Repairs>('repairs');
-    this.repairs = this.repairsCollection.valueChanges();
+    this.repairsCollection = afs.collection('repairs');
+    // this.repairs = this.repairsCollection.valueChanges();
   }
 
   ngOnInit() {
   }
 
-  private addRepair(repair) {
-    this.repairsCollection.add(repair);
+  addRepair() {
     console.log('Dodane!');
+    return this.repairsCollection.add({
+      customerName: this.customerName,
+      car: this.car,
+      plates: this.plates,
+      comment: this.comment,
+      status: this.status,
+    });
   }
+
 }
