@@ -40,7 +40,7 @@ export class RepairsComponent implements OnInit {
     });
 
     console.log('Dodane!'); // Need to change to some notification alert
-    this.router.navigateByUrl('/pages/'); // Need to change after create view of active repairs
+    this.router.navigateByUrl('/pages/show-repairs');
   }
 
 }
