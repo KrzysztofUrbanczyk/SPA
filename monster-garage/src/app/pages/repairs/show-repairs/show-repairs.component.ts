@@ -30,23 +30,9 @@ export class ShowRepairsComponent implements OnInit {
     this.repairs = this.repairsCollection.valueChanges();
   }
 
-  showToDoRepairs() {
+  showRepairsByStatus(status: string) {
     this.repairsCollection = this.afs.collection('repairs', ref => {
-      return ref.where('status', '==', 'Do realizacji');
-    });
-    this.repairs = this.repairsCollection.valueChanges();
-  }
-
-  showDoneRepairs() {
-    this.repairsCollection = this.afs.collection('repairs', ref => {
-      return ref.where('status', '==', 'Zrealizowane');
-    });
-    this.repairs = this.repairsCollection.valueChanges();
-  }
-
-  showDoingRepairs() {
-    this.repairsCollection = this.afs.collection('repairs', ref => {
-      return ref.where('status', '==', 'W trakcie');
+      return ref.where('status', '==', status);
     });
     this.repairs = this.repairsCollection.valueChanges();
   }

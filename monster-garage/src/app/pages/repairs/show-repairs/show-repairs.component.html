@@ -1,44 +1,60 @@
-<h1>Lista zleceń</h1>
+<nb-layout>
+    <nb-layout-column class="text-center">
+        <h1>Lista napraw</h1>
 
-<div>
-    <ul class="list-inline">
-        <li class="list-inline-item"><button class="btn btn-secondary" onclick="showAllRepairs()">Wszystkie</button></li>
-        <li class="list-inline-item"><button class="btn btn-secondary" onclick="showToDoRepairs()">Do realizacji</button></li>
-        <li class="list-inline-item"><button class="btn btn-secondary" onclick="showDoingRepairs()">W trakcie</button></li>
-        <li class="list-inline-item"><button class="btn btn-secondary" onclick="showDoneRepairs()">Zrealizowane</button></li>
-    </ul>
-</div>
+        <div>
+            <ul class="list-inline">
+                <li class="list-inline-item">
+                    <button class="btn btn-secondary" (click)="ngOnInit()">Wszystkie</button>
+                </li>
+                <li class="list-inline-item">
+                    <button class="btn btn-secondary" (click)="showRepairsByStatus('Do realizacji')">Do realizacji
+                    </button>
+                </li>
+                <li class="list-inline-item">
+                    <button class="btn btn-secondary" (click)="showRepairsByStatus('W trakcie')">W trakcie</button>
+                </li>
+                <li class="list-inline-item">
+                    <button class="btn btn-secondary" (click)="showRepairsByStatus('Zrealizowane')">Zrealizowane
+                    </button>
+                </li>
+            </ul>
+        </div>
 
-<div *ngFor="let repair of repairs | async">
-    <table class="table table-bordered">
-        <tr>
-            <th class="colspan-6">Właściciel</th>
-            <td>{{ repair.customerName }}</td>
-        </tr>
-        <tr>
-            <th>Samochód</th>
-            <td>{{ repair.car }}</td>
-        </tr>
-        <tr>
-            <th>Tablice rejestracyjne</th>
-            <td>{{ repair.plates }}</td>
-        </tr>
-        <tr>
-            <th>Uwagi</th>
-            <td>{{ repair.comment }}</td>
-        </tr>
-        <tr>
-            <th>Status</th>
-            <td>{{ repair.status }}</td>
-        </tr>
-        <tr>
-            <th>Dodane</th>
-            <td>{{ repair.createdAt }}</td>
-        </tr>
-        <tr>
-            <th>Termin</th>
-            <td>{{ repair.deadline }}</td>
-        </tr>
-    </table>
-    <hr />
-</div>
+        <div>
+            <div *ngFor="let repair of repairs | async">
+                <table class="repairs-table table table-bordered table-striped table-dark">
+                    <tr>
+                        <th>Właściciel</th>
+                        <td>{{ repair.customerName }}</td>
+                    </tr>
+                    <tr>
+                        <th>Samochód</th>
+                        <td>{{ repair.car }}</td>
+                    </tr>
+                    <tr>
+                        <th>Tablice rejestracyjne</th>
+                        <td>{{ repair.plates }}</td>
+                    </tr>
+                    <tr>
+                        <th>Uwagi</th>
+                        <td>{{ repair.comment }}</td>
+                    </tr>
+                    <tr>
+                        <th>Status</th>
+                        <td>{{ repair.status }}</td>
+                    </tr>
+                    <tr>
+                        <th>Dodane</th>
+                        <td>{{ repair.createdAt }}</td>
+                    </tr>
+                    <tr>
+                        <th>Termin</th>
+                        <td>{{ repair.deadline }}</td>
+                    </tr>
+                </table>
+                <hr/>
+            </div>
+        </div>
+    </nb-layout-column>
+</nb-layout>
