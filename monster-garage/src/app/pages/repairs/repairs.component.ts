@@ -22,7 +22,6 @@ export class RepairsComponent implements OnInit {
   constructor(private afs: AngularFirestore,
               private router: Router) {
     this.repairsCollection = afs.collection('repairs');
-    // this.repairs = this.repairsCollection.valueChanges();
   }
 
   ngOnInit() {
