@@ -18,10 +18,11 @@
           </div>
           <div class="row">
             <div class="col-md-4">
-              <label for="displayName">Nazwa urzytkownika</label>
+              <br><label for="displayName">Zmien nazwe urzytkownika</label>
               <input type="text" class="form-control" id="displayName" name="displayName" [(ngModel)]="displayName" />
+              <hr><button (click)="updateData()"  class="btn btn-default"><i class="glyphicon glyphicon-pencil"></i> Edytuj dane</button><br>
+              {{notify.message}}
             </div>
-          <hr><button (click)="updateUserData()"  class="btn btn-default pull-right"><i class="glyphicon glyphicon-pencil"></i> Edytuj dane</button>
           </div>
         </div>
       </div>

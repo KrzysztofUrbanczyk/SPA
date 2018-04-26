@@ -9,7 +9,7 @@ export interface Msg {
 
 @Injectable()
 export class NotifyService {
-
+  message: string;
   public _msgSource = new Subject<Msg | null>();
 
   msg = this._msgSource.asObservable();
@@ -17,6 +17,10 @@ export class NotifyService {
   update(content: string, style: 'error' | 'info' | 'success') {
     const msg: Msg = {content, style};
     this._msgSource.next(msg);
+
+  }
+  updateData() {
+      this.message = 'Aktualizacja udana!';
   }
 
   clear() {
