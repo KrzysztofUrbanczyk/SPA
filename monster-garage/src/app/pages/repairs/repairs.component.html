@@ -1,0 +1,33 @@
+<nb-layout>
+    <nb-layout-column>
+        <form>
+            <div class="form-group">
+                <label for="customerName">Imię i nazwisko właściciela</label>
+                <input type="text" class="form-control" id="customerName" name="customerName" [(ngModel)]="customerName" required />
+            </div>
+            <div class="form-group">
+                <label for="customerEmail">Email właściciela</label>
+                <input type="email" class="form-control" id="customerEmail" name="customerEmail" [(ngModel)]="customerEmail" required />
+            </div>
+            <div class="form-group">
+                <label for="car">Marka i typ samochodu</label>
+                <input type="text" class="form-control" id="car" name="car" [(ngModel)]="car" required />
+            </div>
+            <div class="form-group">
+                <label for="plates">Tablice rejestracyjne</label>
+                <input type="text" class="form-control" id="plates" name="plates" [(ngModel)]="plates" required />
+            </div>
+            <div class="form-group">
+                <label for="comment">Komentarz do zlecenia</label>
+                <input type="text" class="form-control" id="comment" name="comment" [(ngModel)]="comment" required />
+            </div>
+            <div class="form-group">
+                <label for="deadline">Termin</label>
+                <input type="date" class="form-control" id="deadline" name="deadline" [(ngModel)]="deadline" required />
+            </div>
+            <div class="form-group text-center">
+                <button (click)="addRepair()" class="btn btn-success btn-block">Dodaj zlecenie</button>
+            </div>
+        </form>
+    </nb-layout-column>
+</nb-layout>

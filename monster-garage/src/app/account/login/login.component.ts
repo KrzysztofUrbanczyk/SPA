@@ -10,11 +10,9 @@ import { AuthService } from '../../core/auth.service';
 export class LoginComponent implements OnInit {
   email: string;
   password: string;
-  displayName: string;
 
   constructor(public authService: AuthService,
-              private router: Router) {
-  }
+              private router: Router) {}
 
   ngOnInit() {
 

@@ -17,20 +17,12 @@ export const MENU_ITEMS: NbMenuItem[] = [
     children: [
       {
         title: 'Dodaj zlecenie',
-        link: '#',
+        link: '/pages/repairs',
       },
       {
-        title: 'Do realizacji',
-        link: '#',
+        title: 'Lista napraw',
+        link: '/pages/show-repairs',
       },
-      {
-        title: 'W trakcie',
-        link: '#',
-      },
-      {
-        title: 'Zrealizowane',
-        link: '#',
-      }
     ],
   },
   {

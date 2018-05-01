@@ -6,6 +6,7 @@ import { PagesComponent } from './pages.component';
 import { ThemeModule } from '../@theme/theme.module';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { RepairsComponent } from './repairs/repairs.component';
+import { ShowRepairsComponent } from './repairs/show-repairs/show-repairs.component';
 
 const PAGES_COMPONENTS = [
   PagesComponent,
@@ -21,6 +22,7 @@ const PAGES_COMPONENTS = [
   declarations: [
     ...PAGES_COMPONENTS,
     RepairsComponent,
+    ShowRepairsComponent,
   ],
 })
 export class PagesModule { }
