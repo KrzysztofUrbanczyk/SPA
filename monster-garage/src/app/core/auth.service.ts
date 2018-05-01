@@ -36,14 +36,15 @@ export class AuthService {
       });
   }
 
-  signup(email: string, password: string, displayName: string) {
+  signup(email: string, password: string, displayName: string, photoURL: string) {
     this.afAuth.auth.createUserWithEmailAndPassword(email, password)
       .then((user) => {
         this.notify.update('Rejestracja przebiegła pomyślnie!', 'success');
         const data: User = {
           uid: user.uid,
           email: user.email,
-          displayName: displayName
+          displayName: displayName,
+          photoURL: photoURL
         };
 
         return this.afs.doc<User>(`users/${user.uid}`).set(data);

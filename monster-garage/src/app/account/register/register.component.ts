@@ -12,6 +12,7 @@ export class RegisterComponent implements OnInit {
     email: string;
     password: string;
     displayName: string;
+    photoURL: string;
 
 
     constructor(public authService: AuthService,
@@ -23,8 +24,9 @@ export class RegisterComponent implements OnInit {
     }
 
     register() {
-        this.authService.signup(this.email, this.password, this.displayName);
-        this.email = this.password = this.displayName = '';
+        this.photoURL = 'https://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png';
+        this.authService.signup(this.email, this.password, this.displayName, this.photoURL);
+        this.email = this.password = this.displayName = this.photoURL = '';
         setTimeout((router: Router) => {
           this.router.navigate(['login']);
         }, 5000);
