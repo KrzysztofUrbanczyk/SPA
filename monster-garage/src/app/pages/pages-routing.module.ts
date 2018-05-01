@@ -31,6 +31,10 @@ const routes: Routes = [{
       redirectTo: 'dashboard',
       pathMatch: 'full',
     },
+    {
+      path: 'client',
+      loadChildren: './client/client-list.module#ClientListModule',
+    }
   ],
 }];
 

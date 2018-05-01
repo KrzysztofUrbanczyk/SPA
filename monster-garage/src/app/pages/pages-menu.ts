@@ -34,5 +34,15 @@ export const MENU_ITEMS: NbMenuItem[] = [
         link: '/pages/forms/order-product',
       },
     ],
+  },
+  {
+    title: 'Klienci',
+    icon: 'nb-tables',
+    children: [
+      {
+        title: 'Baza klientów',
+        link: '/pages/client/client-list'
+      }
+    ]
   }
 ];

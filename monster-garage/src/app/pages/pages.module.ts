@@ -7,6 +7,7 @@ import { ThemeModule } from '../@theme/theme.module';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { RepairsComponent } from './repairs/repairs.component';
 import { ShowRepairsComponent } from './repairs/show-repairs/show-repairs.component';
+import {ClientListModule} from './client/client-list.module';
 
 const PAGES_COMPONENTS = [
   PagesComponent,
@@ -17,12 +18,14 @@ const PAGES_COMPONENTS = [
     CommonModule,
     PagesRoutingModule,
     ThemeModule,
-    DashboardModule
+    DashboardModule,
+    ClientListModule
   ],
   declarations: [
     ...PAGES_COMPONENTS,
     RepairsComponent,
     ShowRepairsComponent,
+    RepairsComponent
   ],
 })
 export class PagesModule { }
