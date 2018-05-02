@@ -7,3 +7,24 @@ div.form {
 .linkElement {
     text-align: center;
 }
+
+.correct-data {
+    border-left: 4px solid #42A948; /* green */
+  }
+
+.correct-data:focus {
+    border-left: 4px solid #42A948; /* green */
+
+}
+  
+.incorrect-data{
+    border-left: 4px solid #a94442; /* red */
+ }
+
+.incorrect-data:focus{
+    border-left: 4px solid #a94442; /* red */
+  }
+
+.form-control:focus {
+    border-color: #dadfe6;
+}

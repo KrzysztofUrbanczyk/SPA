@@ -1,100 +1,118 @@
 <nb-layout>      
-        <nb-layout-column>
-            <h1>UWAGA</h1>
-            <h3>żeby działało to w tej chwili trzeba dodac min 2 kategorie i min 2 firmy. Nastepnie trzeba wybrac ze selecta ta druga firme, zeby warotsc taga selected sie zmieniła. 
-                Musze poprawic wybieranie domyslnego selecta</h3>
-            <h3>Wiecej info na trello</h3>
-          <div class="form col-lg-6">
-            <form>
-      
-              <div class="form-group">
-                <label for="category">Category</label>
-                <select class="form-control" id="category" [(ngModel)]="selectedCategory" name="selectedCategory">
-                  <option *ngFor="let category of categories | async">{{category.name}}</option>
-                </select>
-              </div>
-              
-              <div class="linkElement">
-                <a href="#" data-toggle="collapse" data-target="#inputCategory">Add Category</a>
-              </div>
-      
-              <div id="inputCategory" class="collapse">
-                <div class="form-group">
-                  <label for="newCategory">Ten Input powinien sie pojawic jezeli klikniemy "dodaj kategorie"</label>
-                  <input type="text" class="form-control" id="newCategory" name="newCategory" [(ngModel)]="newCategory" required />
-                </div>
-                <div class="form-group text-center">
-                  <button (click)="addNewCategory()" class="btn btn-success btn-block" data-toggle="collapse" data-target="#inputCategory">Wyslij</button>
-                </div>
-              </div>
-      
-              <div class="form-group">
-                <label for="category">productName</label>
-                <input type="text" class="form-control" id="productName" name="productName" [(ngModel)]="productName" required />
-              </div>
-      
-              <div class="form-group">
-                <label for="quantity">Quantity</label>
-                <input type="text" class="form-control" id="quantity" name="quantity" [(ngModel)]="quantity" required />
-              </div>
-      
-              <div class="form-group">
-                <label for="company">Company</label>
-                <select class="form-control" id="company" [(ngModel)]="selectedCompany" name="selectedCompany">
-                  <option *ngFor="let company of companies | async">{{company.name}}</option>
-                </select>
-              </div>
-              
-              <div class="linkElement">
-                <a href="#" data-toggle="collapse" data-target="#inputCompany">Add Company</a>
-              </div>
-      
-              <div id="inputCompany" class="collapse">
-                <div class="form-group">
-                  <label for="addCompany">Nazwa Firmy</label>
-                  <input type="text" class="form-control" id="addNewCompany" name="addNewCompany" [(ngModel)]="newCompany" required />
-                </div>
-      
-                <div class="form-group">
-                  <label for="companyEmail">Email</label>
-                  <input type="text" class="form-control" id="addCompanyEmail" name="addCompanyEmail" [(ngModel)]="newCompanyEmail" required/>
-                </div>
-      
-                <div class="form-group text-center">
-                  <button (click)="addNewCompany()" class="btn btn-success btn-block" data-toggle="collapse" data-target="#inputCompany">Dodaj companie</button>
-                </div>
-              </div>
-              <br/>
-              <div class="form-group text-center">
-                <button (click)="sendOrder()" class="btn btn-success btn-block">Wyslij</button>
-              </div>
-            </form>
+  <nb-layout-column>
+    <div class="form col-lg-6">
+      <form [formGroup] = "orderProductForm">        
+        <div class="form-group">
+          <label for="category">Kategoria</label>
+          <select class="form-control" id="category" name="category" formControlName="categorySelectControl"
+           [(ngModel)]="selectedCategory" [ngClass]="{
+            'incorrect-data': categorySelectControl.invalid && sendOrderIsClicked,
+            'correct-data': categorySelectControl.valid && sendOrderIsClicked
+            }" required>
+            <option [ngValue]="null">Wybierz kategorię</option>
+            <option *ngFor="let category of categories | async">{{category.name}}</option>
+          </select>
+        </div>
+        
+        <div class="linkElement">
+          <a href="#" (click)="clearNewCategoryInput()" data-toggle="collapse" data-target="#inputCategory">Dodaj kategorię</a>
+        </div>
+
+        <div id="inputCategory" class="collapse">
+          <div class="form-group">
+            <label for="newCategory">Nazwa</label>
+            <input type="text" class="form-control" id="newCategory" name="newCategory" formControlName="newCategoryNameControl" 
+            placeholder = "Nazwa musi się składać z minimum 3 znaków" [(ngModel)]="newCategory" 
+            required />
           </div>
-
-          <ul>
-                <li *ngFor="let order of orders | async">
-                    <pre>{{ order | json }}</pre>
-                </li>
-            </ul>
-
-          <div>
-              <h1>Co do zrobienia:</h1>
-              <h2>Dosyc wazne</h2> 
-               - Pobrac dane zalogowanego uzytkownika w celu przypisywania zamowien do niego. W tej chwili jest zahardcodowany 'root' i dla niego ida wszystkie zamowianie.<br/>
-               - Poprawic dodawanie domyslnych wartosci w przypadku gdy z selecta sie nic nie wybierze<br/>
-               - Poprawic wyglad, byc moze uzyc tego nebulara.<br/>
-               - Wymuszenie wpisu w kazdym polu <br/>
-               - funckja wysylajaca maila. W tej chwili tylko dodaje na bazie zamowienie <br/>
-
-               <h3>Plany na przyszlość:</h3>
-               - Moze dodanie daty dostaw i innych takich mniej waznych rzeczy
-               - Dodac komponent do wyswietlania zamowien, akceptowania tego co doszlo na magazyn<br/>
-               - Dodac komponent do wyswietlenia jakichkolwiek statystyk. Byle cos sie pokazywalo<br/>
-               - Być moze coś z produktami, które w tej chwili posiadamy. Ile jest tego/tamtego. To już do analizy czy integrować z innymu komonentami.<br/>
-
-
+          <div class="form-group text-center">
+            <button (click)="addNewCategory()" class="btn btn-success btn-block" data-toggle="collapse" 
+            data-target="#inputCategory" [disabled]="!isNewCategoryCorrect()">DODAJ !</button>
           </div>
-      
-      
-        </nb-layout-column>
-      </nb-layout>
+        </div>
+
+        <div class="form-group">
+          <label for="productName">Nazwa produktu</label>
+          <input type="text" class="form-control" id="productName" name="productName" formControlName="productNameControl" 
+          placeholder="Minimalna ilość znaków: 5" [(ngModel)]="productName" [ngClass]="{
+            'incorrect-data': productNameControl.invalid && sendOrderIsClicked,
+            'correct-data': productNameControl.valid && sendOrderIsClicked
+          }" required />
+        </div>
+       
+        <div class="form-group">
+          <label for="quantity">Ilość</label>
+          <input type="text" class="form-control" id="quantity" name="quantity" formControlName="quantityControl"
+          [(ngModel)]="quantity" [ngClass]="{
+            'incorrect-data': quantityControl.invalid && sendOrderIsClicked,
+            'correct-data': quantityControl.valid && sendOrderIsClicked
+           }" required />
+        </div>
+ 
+        <div class="form-group">
+          <label for="company">Kontrahent</label>
+          <select class="form-control" id="company" name="company" formControlName="companySelectControl" 
+          [(ngModel)]="selectedCompany" [ngClass]="{
+            'incorrect-data': companySelectControl.invalid && sendOrderIsClicked,
+            'correct-data': companySelectControl.valid && sendOrderIsClicked
+           }" required>
+            <option [ngValue]="null">Wybierz kontrahenta</option>
+            <option *ngFor="let company of companies | async">{{company.name}}</option>
+          </select> 
+        </div>
+         
+        <div class="linkElement">
+          <a href="#" (click)="clearNewCompanyInputs()" data-toggle="collapse" data-target="#inputCompany">Dodaj kontrahenta</a>
+        </div>
+        
+        <div id="inputCompany" class="collapse">
+          <div class="form-group">
+            <label for="addNewCompany">Nazwa kontrahenta</label>
+            <input type="text" class="form-control" id="addNewCompany" name="addNewCompany" 
+            formControlName="newCompanyNameControl" [(ngModel)]="newCompany" required />
+          </div> 
+          <div class="form-group">
+            <label for="addCompanyEmail">Email</label>
+            <input type="text" class="form-control" id="addCompanyEmail" name="addCompanyEmail" 
+            formControlName="newCompanyEmailControl" [(ngModel)]="newCompanyEmail" required/>
+          </div>
+ 
+          <div class="form-group text-center">
+            <button (click)="addNewCompany()" class="btn btn-success btn-block" data-toggle="collapse" 
+            data-target="#inputCompany" [disabled] = "!isNewCompanyCorrect()">Dodaj kontrahenta</button>
+          </div>
+        </div>
+        <br/> 
+
+        <div class="form-group text-center">
+          <button (click)="sendOrder()" type="submit" class="btn btn-success" >Wyślij zamówienie</button>
+        </div>
+      </form>
+    </div>
+
+    <ul>
+          <li *ngFor="let order of orders | async">
+              <pre>{{ order | json }}</pre>
+          </li>
+      </ul>
+
+    <div>
+        <h1>Co do zrobienia:</h1>
+        <h2>Dosyc wazne</h2> 
+         - Pobrac dane zalogowanego uzytkownika w celu przypisywania zamowien do niego. W tej chwili jest zahardcodowany 'root' i dla niego ida wszystkie zamowianie.<br/>
+         - Poprawic wyglad, byc moze uzyc tego nebulara.<br/>
+         - funckja wysylajaca maila. W tej chwili tylko dodaje na bazie zamowienie <br/>
+
+         <h3>Plany na przyszlość:</h3>
+         - Moze dodanie daty dostaw i innych takich mniej waznych rzeczy
+         - Dodac komponent do wyswietlania zamowien, akceptowania tego co doszlo na magazyn<br/>
+         - Dodac komponent do wyswietlenia jakichkolwiek statystyk. Byle cos sie pokazywalo<br/>
+         - Być moze coś z produktami, które w tej chwili posiadamy. Ile jest tego/tamtego. To już do analizy czy integrować z innymu komonentami.<br/>
+
+
+    </div>
+
+
+  </nb-layout-column>
+</nb-layout>
+
