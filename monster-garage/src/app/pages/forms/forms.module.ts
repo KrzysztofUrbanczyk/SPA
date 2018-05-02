@@ -14,4 +14,5 @@ import { OrderProductsComponent } from './order-products/order-products.componen
     OrderProductsComponent,
   ],
 })
-export class FormsModule { }
+export class FormsModule {
+}
