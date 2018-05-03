@@ -4,7 +4,7 @@ import { LocalDataSource } from 'ng2-smart-table';
 import { ClientListService } from '../client-list.service';
 
 @Component({
-  selector: 'ngx-smart-table',
+  selector: 'app-ngx-smart-table',
   templateUrl: './smart-table.component.html',
   styles: [`
     nb-card {
