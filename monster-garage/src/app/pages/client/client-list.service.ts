@@ -1,30 +1,29 @@
 import {Injectable} from '@angular/core';
+import {Observable} from 'rxjs/Observable';
+import {AngularFirestore, AngularFirestoreCollection} from 'angularfire2/firestore';
+
+export interface Client {
+  customerName: string;
+  customerEmail: string;
+  car: string;
+  plates: string;
+  comment: string;
+  status: string;
+  createdAt: string;
+  deadline: string;
+  price: string;
+}
 
 @Injectable()
 export class ClientListService {
-  data = [{
-    Name: 'Mark',
-    Email: 'mdo@gmail.com',
-    Car: 'mondeo',
-    Plates: '2asaf8',
-    Comment: '2safdasfas gsdgsdg wegwe8',
-    Status: 'tak',
-    Add: '22-22-2012',
-    Deadline: '22-22-2012',
-    Price: '282',
-  }, {
-    Name: 'Mark',
-    Email: 'mdo@gmail.com',
-    Car: 'mondeo',
-    Plates: '2asaf8',
-    Comment: '2safdasfas gsdgsdg wegwe8',
-    Status: 'tak',
-    Add: '22-22-2012',
-    Deadline: '22-22-2012',
-    Price: '282',
-  }];
+
+  repairsCollection: AngularFirestoreCollection<Client>;
+  repairs: Observable<Client[]>;
+
+  constructor(private afs: AngularFirestore) {}
 
   getData() {
-    return this.data;
+    this.repairsCollection = this.afs.collection('repairs');
+    return this.repairsCollection.valueChanges();
   }
 }

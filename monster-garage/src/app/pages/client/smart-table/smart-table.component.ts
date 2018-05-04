@@ -1,16 +1,14 @@
-import { Component } from '@angular/core';
+import { Component} from '@angular/core';
 import { LocalDataSource } from 'ng2-smart-table';
-
-import { ClientListService } from '../client-list.service';
-
+import {Client, ClientListService} from '../client-list.service';
 @Component({
   selector: 'app-ngx-smart-table',
   templateUrl: './smart-table.component.html',
   styles: [`
-    nb-card {
-      transform: translate3d(0, 0, 0);
-    }
-  `],
+nb-card {
+transform: translate3d(0, 0, 0);
+}
+`],
 })
 export class SmartTableComponent {
 
@@ -30,52 +28,52 @@ export class SmartTableComponent {
       confirmDelete: true,
     },
     columns: {
-      Name: {
+      customerName: {
         title: 'Imię',
         type: 'string',
       },
-      Email: {
+      customerEmail: {
         title: 'E-mail',
         type: 'string',
       },
-      Car: {
+      car: {
         title: 'Samochód',
         type: 'string',
       },
-      Plates: {
+      plates: {
         title: 'Tablice',
         type: 'string',
       },
-      Comment: {
+      comment: {
         title: 'Komentarz',
         type: 'string',
       },
-      Status: {
-        title: 'Status',
+      createdAt: {
+        title: 'Data',
         type: 'string',
       },
-      Add: {
-        title: 'Dodane',
-        type: 'string',
-      },
-      Deadline: {
+      deadline: {
         title: 'Termin',
         type: 'string',
       },
-      Price: {
+      price: {
         title: 'Cena',
-        type: 'number',
+        type: 'string',
       },
 
     },
   };
 
   source: LocalDataSource = new LocalDataSource();
+  clients: Client[] = [];
 
   constructor(private service: ClientListService) {
-    const data = this.service.getData();
-    this.source.load(data);
+    this.service.getData().subscribe(clients => {
+      this.clients = clients as Client[];
+      this.source.load(this.clients);
+    });
   }
+
 
   onDeleteConfirm(event): void {
     if (window.confirm('Are you sure you want to delete?')) {
