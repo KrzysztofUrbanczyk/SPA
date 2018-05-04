@@ -26,4 +26,8 @@ export class ClientListService {
     this.repairsCollection = this.afs.collection('repairs');
     return this.repairsCollection.valueChanges();
   }
+
+  addClient(data: any) {
+    this.repairsCollection.add(data as Client);
+  }
 }

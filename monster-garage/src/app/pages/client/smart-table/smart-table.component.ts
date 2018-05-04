@@ -17,6 +17,7 @@ export class SmartTableComponent {
       addButtonContent: '<i class="nb-plus"></i>',
       createButtonContent: '<i class="nb-checkmark"></i>',
       cancelButtonContent: '<i class="nb-close"></i>',
+      confirmCreate: true,
     },
     edit: {
       editButtonContent: '<i class="nb-edit"></i>',
@@ -74,12 +75,7 @@ export class SmartTableComponent {
     });
   }
 
-
-  onDeleteConfirm(event): void {
-    if (window.confirm('Are you sure you want to delete?')) {
-      event.confirm.resolve();
-    } else {
-      event.confirm.reject();
-    }
+  onCreateConfirm(event) {
+    this.service.addClient(event.newData);
   }
 }
