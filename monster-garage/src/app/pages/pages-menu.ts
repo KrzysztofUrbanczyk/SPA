@@ -45,7 +45,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
     children: [
       {
         title: 'Baza klientów',
-        link: '/pages/client/client-list'
+        link: '/pages/client-list'
       }
     ]
   }
