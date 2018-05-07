@@ -48,3 +48,24 @@ function sendEmail(email, displayName) {
         console.log('New welcome email sent to:', email);
     });
 }
+
+exports.sendWelcomeEmail = functions.auth.user().onCreate((user) => {
+    const email = user.email;
+    const displayName = user.displayName;
+
+    return sendWelcomeEmail(email, displayName);
+});
+
+function sendWelcomeEmail(email, displayName) {
+    const mailOptions = {
+        from: `${APP_NAME} <noreply@firebase.com>`,
+        to: email,
+    };
+
+    mailOptions.subject = `Witaj w ${APP_NAME}!`;
+    mailOptions.text = `Cześć ${displayName || ''}! Witaj w ${APP_NAME}. Mam nadzieje że spodoba Ci się nasz serwis.`;
+    return mailTransport.sendMail(mailOptions).then(() => {
+        return console.log('New welcome email sent to:', email);
+    });
+}
+
