@@ -7,7 +7,6 @@ import { AngularFirestore, AngularFirestoreDocument } from 'angularfire2/firesto
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/switchMap';
-import { NotifyService } from './notify.service';
 
 interface User {
   uid: string;
@@ -23,8 +22,7 @@ export class AuthService {
 
   constructor(private afAuth: AngularFireAuth,
     private afs: AngularFirestore,
-    private router: Router,
-    public notify: NotifyService) {
+    private router: Router) {
 
     this.user = this.afAuth.authState
       .switchMap(user => {
@@ -39,7 +37,6 @@ export class AuthService {
   signup(email: string, password: string, displayName: string, photoURL: string) {
     this.afAuth.auth.createUserWithEmailAndPassword(email, password)
       .then((user) => {
-        this.notify.update('Rejestracja przebiegła pomyślnie!', 'success');
         const data: User = {
           uid: user.uid,
           email: user.email,
@@ -80,7 +77,6 @@ export class AuthService {
 
   public updateUserData(user) {
     const userRef: AngularFirestoreDocument<User> = this.afs.doc(`users/${user.uid}`);
-    this.notify.updateData();
     const data: User = {
       uid: user.uid,
       email: user.email,
@@ -88,13 +84,9 @@ export class AuthService {
       photoURL: user.photoURL
     };
       return this.afs.doc<User>(`users/${user.uid}`).set(data);
-
   }
 
-
   public handleError(error) {
-    console.log(error);
-    this.notify.update(error.message, 'error');
   }
 
   logout() {

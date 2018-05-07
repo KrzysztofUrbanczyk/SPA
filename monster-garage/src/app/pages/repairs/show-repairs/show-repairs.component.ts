@@ -25,7 +25,8 @@ export class ShowRepairsComponent implements OnInit {
   repairsCollection: AngularFirestoreCollection<Repairs>;
   repairs: Observable<Repairs[]>;
 
-  constructor(private afs: AngularFirestore) {}
+  constructor(private afs: AngularFirestore) {
+  }
 
   ngOnInit() {
     this.repairsCollection = this.afs.collection('repairs');

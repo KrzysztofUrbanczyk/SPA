@@ -2,8 +2,6 @@ import { ModuleWithProviders, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LayoutOneColumnComponent } from './layout/one-column/one-column.component';
-
-
 import { HeaderComponent } from './header/header.component';
 
 import {
@@ -37,7 +35,7 @@ const COMPONENTS = [
 ];
 
 const NB_THEME_PROVIDERS = [
-  ...NbThemeModule.forRoot({ name: 'default' }).providers,
+  ...NbThemeModule.forRoot({name: 'default'}).providers,
   ...NbSidebarModule.forRoot().providers,
   ...NbMenuModule.forRoot().providers,
 ];

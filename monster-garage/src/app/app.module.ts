@@ -12,7 +12,6 @@ import { AuthGuard } from './core/auth.guard';
 import { ThemeModule } from './@theme/theme.module';
 import { SimpleNotificationsModule } from 'angular2-notifications';
 import { LogoutComponent } from './account/logout/logout.component';
-import {NotifyService} from './core/notify.service';
 
 @NgModule({
   declarations: [
@@ -30,7 +29,7 @@ import {NotifyService} from './core/notify.service';
     SimpleNotificationsModule.forRoot(),
     ThemeModule.forRoot()
   ],
-  providers: [AuthGuard, NotifyService],
+  providers: [AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule {
