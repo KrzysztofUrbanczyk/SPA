@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+
 import * as firebase from 'firebase/app';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFirestore, AngularFirestoreDocument } from 'angularfire2/firestore';
+
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/switchMap';
 
@@ -19,8 +21,8 @@ export class AuthService {
   user: Observable<User>;
 
   constructor(private afAuth: AngularFireAuth,
-              private afs: AngularFirestore,
-              private router: Router) {
+    private afs: AngularFirestore,
+    private router: Router) {
 
     this.user = this.afAuth.authState
       .switchMap(user => {
@@ -81,11 +83,10 @@ export class AuthService {
       displayName: user.displayName,
       photoURL: user.photoURL
     };
-    return this.afs.doc<User>(`users/${user.uid}`).set(data);
+      return this.afs.doc<User>(`users/${user.uid}`).set(data);
   }
 
   public handleError(error) {
-
   }
 
   logout() {

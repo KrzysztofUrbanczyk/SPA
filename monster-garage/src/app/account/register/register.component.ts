@@ -12,6 +12,7 @@ export class RegisterComponent implements OnInit {
   password: string;
   displayName: string;
   photoURL: string;
+  msg: string;
 
   constructor(public authService: AuthService,
               private router: Router) {
@@ -24,6 +25,7 @@ export class RegisterComponent implements OnInit {
     this.photoURL = 'https://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png';
     this.authService.signup(this.email, this.password, this.displayName, this.photoURL);
     this.email = this.password = this.displayName = this.photoURL = '';
+    this.msg = 'Rejestracja przebiegła pomyślnie';
     setTimeout((router: Router) => {
       this.router.navigate(['login']);
     }, 2000);
