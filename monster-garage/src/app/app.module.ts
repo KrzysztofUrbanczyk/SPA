@@ -12,6 +12,10 @@ import { AuthGuard } from './core/auth.guard';
 import { ThemeModule } from './@theme/theme.module';
 import { SimpleNotificationsModule } from 'angular2-notifications';
 import { LogoutComponent } from './account/logout/logout.component';
+import { NotifyService } from './core/notify.service';
+import { HttpClientModule } from '@angular/common/http';
+import { EmailService } from './core/email.service';
+
 
 @NgModule({
   declarations: [
@@ -27,9 +31,10 @@ import { LogoutComponent } from './account/logout/logout.component';
     AngularFireModule.initializeApp(environment.firebase),
     CoreModule,
     SimpleNotificationsModule.forRoot(),
-    ThemeModule.forRoot()
+    ThemeModule.forRoot(),
+    HttpClientModule
   ],
-  providers: [AuthGuard],
+  providers: [AuthGuard, NotifyService, EmailService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
