@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { NbMenuItem } from '@nebular/theme';
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { Observable } from 'rxjs/Observable';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
@@ -114,7 +112,7 @@ export class OrderProductsComponent implements OnInit {
       this.companiesCollection.doc(this.owner).collection('Company').doc(this.newCompany).set({
         name: this.newCompany,
         eMail: this.newCompanyEmail
-     });
+      });
     }
   }
 
@@ -137,13 +135,13 @@ export class OrderProductsComponent implements OnInit {
 
   isOrderCorrect() {
     return this.categorySelectControl.status === 'VALID' && this.productNameControl.status === 'VALID'
-    && this.quantityControl.status === 'VALID' && this.companySelectControl.status === 'VALID';
+      && this.quantityControl.status === 'VALID' && this.companySelectControl.status === 'VALID';
   }
 
   sendOrder() {
     this.sendOrderIsClicked = true;
-      if (this.isOrderCorrect()) {
-        this.orderCollection.doc(this.owner).collection('Order').add({
+    if (this.isOrderCorrect()) {
+      this.orderCollection.doc(this.owner).collection('Order').add({
         category: this.selectedCategory,
         product: this.productName,
         quantity: this.quantity,

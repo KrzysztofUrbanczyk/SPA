@@ -1,8 +1,6 @@
 import { NgModule } from '@angular/core';
-
 import { ThemeModule } from '../../@theme/theme.module';
 import { DashboardComponent } from './dashboard.component';
-
 
 @NgModule({
   imports: [
@@ -12,4 +10,5 @@ import { DashboardComponent } from './dashboard.component';
     DashboardComponent,
   ],
 })
-export class DashboardModule { }
+export class DashboardModule {
+}

@@ -8,7 +8,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
     home: true,
   },
   {
-    title: 'Jakiś tytuł',
+    title: 'Menu główne',
     group: true,
   },
   {
@@ -28,7 +28,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
   {
     title: 'Formularze',
     icon: 'nb-compose',
-    children:  [
+    children: [
       {
         title: 'Zamów produkt',
         link: '/pages/forms/order-product',
