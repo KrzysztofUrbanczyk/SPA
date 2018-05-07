@@ -1,6 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../../core/auth.service';
-import { NotifyService } from '../../../core/notify.service';
 
 @Component({
   selector: 'app-user-profile',
@@ -14,8 +13,7 @@ export class UserProfileComponent implements OnInit {
   photoURL: string;
   uid: string;
 
-  constructor(public auth: AuthService,
-              public notify: NotifyService) {
+  constructor(public auth: AuthService) {
   }
 
   ngOnInit() {
