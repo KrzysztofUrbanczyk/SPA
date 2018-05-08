@@ -1,11 +1,8 @@
-import { NgModule, Pipe, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../core/auth.service';
-import { ReactiveFormsModule, FormControl, Validators, FormGroup, FormBuilder } from '@angular/forms';
-import { BrowserModule } from '@angular/platform-browser';
+import { FormControl, Validators, FormGroup } from '@angular/forms';
 import { ToastrController } from 'ng2-toastr-notifications';
-
-
 
 @Component({
   selector: 'app-login',
@@ -16,11 +13,11 @@ export class LoginComponent implements OnInit {
   loginform: FormGroup;
   email: FormControl;
   password: FormControl;
-  constructor(public authService: AuthService,
-    private router: Router,
-    private toastCtrl: ToastrController) {
-  }
 
+  constructor(public authService: AuthService,
+              private router: Router,
+              private toastCtrl: ToastrController) {
+  }
 
   ngOnInit() {
     this.createFormControls();
@@ -45,7 +42,6 @@ export class LoginComponent implements OnInit {
     });
   }
 
-
   login() {
     if (this.loginform.valid) {
       this.authService.emailLogin(this.email.value, this.password.value)
@@ -55,7 +51,7 @@ export class LoginComponent implements OnInit {
         })
         .catch((ex) => {
           if (ex.code === 'auth/user-not-found') {
-            this.toastCtrl.show({ type: 'error', title: 'Uwaga!', message: 'Błędne dane!' });
+            this.toastCtrl.show({type: 'error', title: 'Uwaga!', message: 'Błędne dane!'});
           }
         });
     }

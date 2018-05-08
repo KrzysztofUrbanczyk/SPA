@@ -7,6 +7,7 @@ import { AngularFirestore, AngularFirestoreDocument } from 'angularfire2/firesto
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/switchMap';
+import { ToastrController } from 'ng2-toastr-notifications';
 
 interface User {
   uid: string;
@@ -21,8 +22,9 @@ export class AuthService {
   user: Observable<User>;
 
   constructor(private afAuth: AngularFireAuth,
-    private afs: AngularFirestore,
-    private router: Router) {
+              private afs: AngularFirestore,
+              private router: Router,
+              private toastCtrl: ToastrController) {
 
     this.user = this.afAuth.authState
       .switchMap(user => {
@@ -82,7 +84,7 @@ export class AuthService {
       displayName: user.displayName,
       photoURL: user.photoURL
     };
-      return this.afs.doc<User>(`users/${user.uid}`).set(data);
+    return this.afs.doc<User>(`users/${user.uid}`).set(data);
   }
 
   public handleError(error) {
@@ -90,6 +92,7 @@ export class AuthService {
 
   logout() {
     this.afAuth.auth.signOut().then(() => {
+      this.toastCtrl.show({type: 'success', title: 'Success', message: 'Pomyślnie wylogowano'});
       this.router.navigateByUrl('/login');
     });
   }
