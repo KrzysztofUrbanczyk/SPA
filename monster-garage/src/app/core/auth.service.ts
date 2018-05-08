@@ -53,8 +53,7 @@ export class AuthService {
   }
 
   emailLogin(email: string, password: string) {
-    return this.afAuth.auth.signInWithEmailAndPassword(email, password)
-      .catch(error => this.handleError(error));
+    return this.afAuth.auth.signInWithEmailAndPassword(email, password);
   }
 
   twitterLogin() {
