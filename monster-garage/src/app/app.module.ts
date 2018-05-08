@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './account/login/login.component';
 import { AppRoutingModule } from './app-routing.module';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AngularFireModule } from 'angularfire2';
 import { environment } from '../environments/environment';
 import { RegisterComponent } from './account/register/register.component';
@@ -14,7 +14,7 @@ import { SimpleNotificationsModule } from 'angular2-notifications';
 import { LogoutComponent } from './account/logout/logout.component';
 import { HttpClientModule } from '@angular/common/http';
 import { EmailService } from './core/email.service';
-
+import { ToastrModule } from 'ng2-toastr-notifications';
 
 @NgModule({
   declarations: [
@@ -31,7 +31,9 @@ import { EmailService } from './core/email.service';
     CoreModule,
     SimpleNotificationsModule.forRoot(),
     ThemeModule.forRoot(),
-    HttpClientModule
+    ToastrModule.forRoot(),
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [AuthGuard, EmailService],
   bootstrap: [AppComponent]
