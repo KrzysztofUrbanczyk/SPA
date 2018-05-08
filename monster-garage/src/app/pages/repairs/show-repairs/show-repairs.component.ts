@@ -1,42 +1,91 @@
-import { Component, OnInit } from '@angular/core';
-import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
-import { Observable } from 'rxjs/Observable';
-
-interface Repairs {
-  customerName: string;
-  customerEmail: string;
-  car: string;
-  plates: string;
-  comment: string;
-  status: string;
-  createdAt: string;
-  deadline: string;
-  price: string;
-}
+import { Component } from '@angular/core';
+import { LocalDataSource } from 'ng2-smart-table';
+import { Client, ShowRepairsService } from './show-repairs.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-show-repairs',
   templateUrl: './show-repairs.component.html',
-  styleUrls: ['./show-repairs.component.css']
+  styles: [`nb-card {
+  transform: translate3d(0, 0, 0);
+  }`],
 })
+export class ShowRepairsComponent {
 
-export class ShowRepairsComponent implements OnInit {
+  settings = {
+    add: {
+      addButtonContent: '<i class="nb-plus"></i>',
+      createButtonContent: '<i class="nb-checkmark"></i>',
+      cancelButtonContent: '<i class="nb-close"></i>',
+      confirmCreate: true,
+    },
+    edit: {
+      editButtonContent: '<i class="nb-edit"></i>',
+      saveButtonContent: '<i class="nb-checkmark"></i>',
+      cancelButtonContent: '<i class="nb-close"></i>',
+      confirmSave: true,
+    },
+    delete: {
+      deleteButtonContent: '<i class="nb-trash"></i>',
+      confirmDelete: true,
+    },
+    columns: {
+      customerName: {
+        title: 'Imię',
+        type: 'string',
+      },
+      customerEmail: {
+        title: 'E-mail',
+        type: 'string',
+      },
+      car: {
+        title: 'Samochód',
+        type: 'string',
+      },
+      plates: {
+        title: 'Tablice',
+        type: 'string',
+      },
+      comment: {
+        title: 'Komentarz',
+        type: 'string',
+      },
+      createdAt: {
+        title: 'Data',
+        type: 'string',
+      },
+      deadline: {
+        title: 'Termin',
+        type: 'string',
+      },
+      price: {
+        title: 'Cena',
+        type: 'string',
+      },
 
-  repairsCollection: AngularFirestoreCollection<Repairs>;
-  repairs: Observable<Repairs[]>;
+    },
+  };
 
-  constructor(private afs: AngularFirestore) {}
+  source: LocalDataSource = new LocalDataSource();
+  clients: Client[] = [];
 
-  ngOnInit() {
-    this.repairsCollection = this.afs.collection('repairs');
-    this.repairs = this.repairsCollection.valueChanges();
-  }
-
-  showRepairsByStatus(status: string) {
-    this.repairsCollection = this.afs.collection('repairs', ref => {
-      return ref.where('status', '==', status);
+  constructor(private service: ShowRepairsService,
+    private router: Router) {
+    this.service.getData().subscribe(clients => {
+      this.clients = clients as Client[];
+      this.source.load(this.clients);
     });
-    this.repairs = this.repairsCollection.valueChanges();
   }
 
+  onCreateConfirm(event) {
+    this.service.addClient(event.newData);
+  }
+
+  onEditConfirm(event) {
+    this.service.editClient(event.newData);
+  }
+
+  onDeleteConfirm(event) {
+    this.service.deleteClient(event.data);
+  }
 }

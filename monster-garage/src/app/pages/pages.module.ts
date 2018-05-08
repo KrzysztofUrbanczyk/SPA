@@ -10,6 +10,8 @@ import { ShowRepairsComponent } from './repairs/show-repairs/show-repairs.compon
 import { ClientListComponent } from './client/client-list.component';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { ClientListService } from './client/client-list.service';
+import { ShowRepairsService } from './repairs/show-repairs/show-repairs.service';
+
 
 
 const PAGES_COMPONENTS = [
@@ -32,6 +34,7 @@ const PAGES_COMPONENTS = [
   ],
   providers: [
         ClientListService,
+        ShowRepairsService,
   ]
 })
 export class PagesModule { }
