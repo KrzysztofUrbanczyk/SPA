@@ -1,8 +1,8 @@
-import { NgModule, Pipe, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../core/auth.service';
-import { ReactiveFormsModule, FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
-import { BrowserModule } from '@angular/platform-browser';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { ToastrController } from 'ng2-toastr-notifications';
 
 @Component({
   selector: 'app-register',
@@ -10,13 +10,14 @@ import { BrowserModule } from '@angular/platform-browser';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-  registerform: FormGroup;
+  registerForm: FormGroup;
   email: FormControl;
   password: FormControl;
   displayName: FormControl;
 
   constructor(public authService: AuthService,
-    private router: Router) {
+              private router: Router,
+              private toastCtrl: ToastrController) {
   }
 
   ngOnInit() {
@@ -30,7 +31,7 @@ export class RegisterComponent implements OnInit {
     ]);
     this.email = new FormControl('', [
       Validators.required,
-      Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')
+      Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9]+[.]{1}[a-z]{2,4}$')
     ]);
     this.password = new FormControl('', [
       Validators.required,
@@ -39,7 +40,7 @@ export class RegisterComponent implements OnInit {
   }
 
   createForm() {
-    this.registerform = new FormGroup({
+    this.registerForm = new FormGroup({
       displayName: this.displayName,
       email: this.email,
       password: this.password
@@ -47,15 +48,17 @@ export class RegisterComponent implements OnInit {
   }
 
   register() {
-    if (this.registerform.valid) {
+    if (this.registerForm.valid) {
       const photoURL = 'https://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png';
-      Promise.resolve()
-        .then(() => {
-          this.authService.signup(this.email.value, this.password.value, this.displayName.value, photoURL);
-          this.registerform.reset();
-        })
+
+      this.authService.signup(this.email.value, this.password.value, this.displayName.value, photoURL)
         .then(() => {
           this.authService.emailLogin(String(this.email.value), String(this.password.value));
+          this.toastCtrl.show({
+            type: 'success',
+            title: 'Sukces',
+            message: 'Udało się! Zostałeś automatycznie zalogowany'
+          });
           this.router.navigateByUrl('/pages');
         });
     }

@@ -1,10 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-
 import * as firebase from 'firebase/app';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFirestore, AngularFirestoreDocument } from 'angularfire2/firestore';
-
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/switchMap';
 import { ToastrController } from 'ng2-toastr-notifications';
@@ -37,7 +35,7 @@ export class AuthService {
   }
 
   signup(email: string, password: string, displayName: string, photoURL: string) {
-    this.afAuth.auth.createUserWithEmailAndPassword(email, password)
+    return this.afAuth.auth.createUserWithEmailAndPassword(email, password)
       .then((user) => {
         const data: User = {
           uid: user.uid,
@@ -92,7 +90,7 @@ export class AuthService {
 
   logout() {
     this.afAuth.auth.signOut().then(() => {
-      this.toastCtrl.show({type: 'success', title: 'Success', message: 'Pomyślnie wylogowano'});
+      this.toastCtrl.show({type: 'success', title: 'Sukces', message: 'Pomyślnie wylogowano'});
       this.router.navigateByUrl('/login');
     });
   }
