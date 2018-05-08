@@ -15,6 +15,8 @@ export class RegisterComponent implements OnInit {
   password: FormControl;
   displayName: FormControl;
 
+  public loading = false;
+
   constructor(public authService: AuthService,
               private router: Router,
               private toastCtrl: ToastrController) {
@@ -49,6 +51,7 @@ export class RegisterComponent implements OnInit {
 
   register() {
     if (this.registerForm.valid) {
+      this.loading = true;
       const photoURL = 'https://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png';
 
       this.authService.signup(this.email.value, this.password.value, this.displayName.value, photoURL)

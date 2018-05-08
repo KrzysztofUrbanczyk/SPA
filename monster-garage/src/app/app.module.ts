@@ -15,6 +15,7 @@ import { LogoutComponent } from './account/logout/logout.component';
 import { HttpClientModule } from '@angular/common/http';
 import { EmailService } from './core/email.service';
 import { ToastrModule } from 'ng2-toastr-notifications';
+import { LoadingModule } from 'ngx-loading';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { ToastrModule } from 'ng2-toastr-notifications';
     ThemeModule.forRoot(),
     ToastrModule.forRoot(),
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    LoadingModule
   ],
   providers: [AuthGuard, EmailService],
   bootstrap: [AppComponent]
