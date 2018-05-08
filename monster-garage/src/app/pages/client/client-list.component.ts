@@ -1,16 +1,16 @@
 import { Component } from '@angular/core';
 import { LocalDataSource } from 'ng2-smart-table';
-import { Client, ShowRepairsService } from './show-repairs.service';
+import { Client, ClientListService } from './client-list.service';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-show-repairs',
-  templateUrl: './show-repairs.component.html',
+  selector: 'app-client-list',
+  templateUrl: './client-list.component.html',
   styles: [`nb-card {
-  transform: translate3d(0, 0, 0);
+  transform: translate3d(2, 2, 2);
   }`],
 })
-export class ShowRepairsComponent {
+export class ClientListComponent {
 
   settings = {
     add: {
@@ -46,31 +46,13 @@ export class ShowRepairsComponent {
         title: 'Tablice',
         type: 'string',
       },
-      comment: {
-        title: 'Komentarz',
-        type: 'string',
-      },
-      createdAt: {
-        title: 'Data',
-        type: 'string',
-      },
-      deadline: {
-        title: 'Termin',
-        type: 'string',
-      },
-      price: {
-        title: 'Cena',
-        type: 'string',
-      },
-
     },
   };
-
 
   source: LocalDataSource = new LocalDataSource();
   clients: Client[] = [];
 
-  constructor(private service: ShowRepairsService,
+  constructor(private service: ClientListService,
     private router: Router) {
     this.service.getData().subscribe(clients => {
       this.clients = clients as Client[];

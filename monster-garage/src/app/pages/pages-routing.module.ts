@@ -4,6 +4,7 @@ import { PagesComponent } from './pages.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { RepairsComponent } from './repairs/repairs.component';
 import { ShowRepairsComponent } from './repairs/show-repairs/show-repairs.component';
+import { ClientListComponent } from './client/client-list.component';
 
 const routes: Routes = [{
   path: '',
@@ -30,6 +31,10 @@ const routes: Routes = [{
       redirectTo: 'dashboard',
       pathMatch: 'full',
     },
+    {
+      path: 'client-list',
+      component: ClientListComponent
+    }
   ],
 }];
 

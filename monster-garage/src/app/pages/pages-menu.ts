@@ -33,6 +33,20 @@ export const MENU_ITEMS: NbMenuItem[] = [
         title: 'Zamów produkt',
         link: '/pages/forms/order-product',
       },
+      {
+        title:  'Lista zamowień',
+        link: '/pages/forms/order-list'
+      },
     ],
+  },
+  {
+    title: 'Klienci',
+    icon: 'nb-tables',
+    children: [
+      {
+        title: 'Baza klientów',
+        link: '/pages/client-list'
+      }
+    ]
   }
 ];
