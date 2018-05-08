@@ -1,31 +1,38 @@
-
-<div class="container">
-  <div class="row">
-    <div class="col-md-9">
-      <div class="panel panel-default">
-        <div class="panel-body">
-          <div class="row">
-            <div class="col-md-12 lead">Profil Uzytkownika {{user?.displayName}}<hr></div>
-          </div>
-          <div class="row">
-            <div class="col-md-8">
-              <div class="row">
-                <div class="col-md-6">
-                  <span class="text-muted">Email:</span> {{user?.email}}<br>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-4">
-              <br><label for="displayName">Zmien nazwe urzytkownika</label>
-              <input type="text" class="form-control" id="displayName" name="displayName" [(ngModel)]="displayName" />
-              <hr><button (click)="updateData()"  class="btn btn-default"><i class="glyphicon glyphicon-pencil"></i> Edytuj dane</button><br>
-              {{notify.message}}
-            </div>
-          </div>
+<nb-layout>
+    <nb-layout-column>
+        <div class="row">
+        <div class="col-4">
         </div>
-      </div>
-    </div>
-  </div>
-</div>
+
+        <div class="col-4">
+                <h2>Profil użytkownika</h2>
+                <img src="{{ user.photoURL }}" />
+                <span>
+                    <strong>{{user?.displayName}}</strong>
+                    <br />
+                    <strong>{{user?.email}}</strong>
+                </span>
+
+                <hr />
+                <form novalidate [formGroup]="editForm">
+                    <div class="form-group">
+                        <label for="displayName">Edytuj nazwę użytkownika</label>
+                        <input type="text" class="form-control" id="displayName" formControlName="displayName" required
+                               [ngClass]="{
+                        'is-invalid': displayName.invalid && (displayName.dirty || displayName.touched),
+                        'is-valid': displayName.valid && (displayName.dirty || displayName.touched)}">
+                        <div class="form-control-feedback"
+                             *ngIf="displayName.errors && (displayName.dirty || displayName.touched)">
+                            <p *ngIf="displayName.errors.minlength">Nazwa musi zawierać przynajmniej 3 znaki!</p>
+                        </div>
+                    </div>
+                    <button (click)="updateData()" class="btn btn-success btn-block" [disabled]="!editForm.valid">
+                        Gotowe
+                    </button>
+                </form>
+        </div>
+        <div class="col-4">
+        </div>
+        </div>
+    </nb-layout-column>
+</nb-layout>
