@@ -41,14 +41,14 @@ export class OrderProductsComponent implements OnInit {
   private sendOrderIsClicked: boolean;
 
   constructor(db: AngularFirestore) {
-    this.owner = 'root';
+    // this.owner = 'root';
     this.categoriesCollection = db.collection('Categories');
     this.companiesCollection = db.collection('Companies');
     this.orderCollection = db.collection('Orders');
 
-    this.categories = this.categoriesCollection.doc(this.owner).collection('Category').valueChanges();
-    this.companies = this.companiesCollection.doc(this.owner).collection('Company').valueChanges();
-    this.orders = this.orderCollection.doc(this.owner).collection('Order').valueChanges();
+    this.categories = this.categoriesCollection.valueChanges();
+    this.companies = this.companiesCollection.valueChanges();
+    this.orders = this.orderCollection.valueChanges();
   }
 
   ngOnInit() {
@@ -101,7 +101,7 @@ export class OrderProductsComponent implements OnInit {
 
   addNewCategory() {
     if (this.isNewCategoryCorrect()) {
-      this.categoriesCollection.doc(this.owner).collection('Category').doc(this.newCategory).set({
+      this.categoriesCollection.doc(this.newCategory).set({
         name: this.newCategory
       });
     }
@@ -109,7 +109,7 @@ export class OrderProductsComponent implements OnInit {
 
   addNewCompany() {
     if (this.isNewCompanyCorrect()) {
-      this.companiesCollection.doc(this.owner).collection('Company').doc(this.newCompany).set({
+      this.companiesCollection.doc(this.newCompany).set({
         name: this.newCompany,
         eMail: this.newCompanyEmail
       });
@@ -141,7 +141,7 @@ export class OrderProductsComponent implements OnInit {
   sendOrder() {
     this.sendOrderIsClicked = true;
     if (this.isOrderCorrect()) {
-      this.orderCollection.doc(this.owner).collection('Order').add({
+      this.orderCollection.add({
         category: this.selectedCategory,
         product: this.productName,
         quantity: this.quantity,

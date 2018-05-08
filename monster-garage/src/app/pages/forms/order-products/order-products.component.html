@@ -94,23 +94,7 @@
           <li *ngFor="let order of orders | async">
               <pre>{{ order | json }}</pre>
           </li>
-      </ul>
-
-    <div>
-        <h1>Co do zrobienia:</h1>
-        <h2>Dosyc wazne</h2> 
-         - Pobrac dane zalogowanego uzytkownika w celu przypisywania zamowien do niego. W tej chwili jest zahardcodowany 'root' i dla niego ida wszystkie zamowianie.<br/>
-         - Poprawic wyglad, byc moze uzyc tego nebulara.<br/>
-         - funckja wysylajaca maila. W tej chwili tylko dodaje na bazie zamowienie <br/>
-
-         <h3>Plany na przyszlość:</h3>
-         - Moze dodanie daty dostaw i innych takich mniej waznych rzeczy
-         - Dodac komponent do wyswietlania zamowien, akceptowania tego co doszlo na magazyn<br/>
-         - Dodac komponent do wyswietlenia jakichkolwiek statystyk. Byle cos sie pokazywalo<br/>
-         - Być moze coś z produktami, które w tej chwili posiadamy. Ile jest tego/tamtego. To już do analizy czy integrować z innymu komonentami.<br/>
-
-
-    </div>
+    </ul>
 
 
   </nb-layout-column>
