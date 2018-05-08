@@ -35,7 +35,7 @@ export class AuthService {
   }
 
   signup(email: string, password: string, displayName: string, photoURL: string) {
-    this.afAuth.auth.createUserWithEmailAndPassword(email, password)
+    return this.afAuth.auth.createUserWithEmailAndPassword(email, password)
       .then((user) => {
         const data: User = {
           uid: user.uid,
@@ -90,7 +90,7 @@ export class AuthService {
 
   logout() {
     this.afAuth.auth.signOut().then(() => {
-      this.toastCtrl.show({type: 'success', title: 'Success', message: 'Pomyślnie wylogowano'});
+      this.toastCtrl.show({type: 'success', title: 'Sukces', message: 'Pomyślnie wylogowano'});
       this.router.navigateByUrl('/login');
     });
   }
