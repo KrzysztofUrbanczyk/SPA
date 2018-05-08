@@ -6,7 +6,7 @@
         <div class="col-lg-4">
         </div>
         <div class="form col-lg-4">
-            <form novalidate [formGroup]="registerform">
+            <form novalidate [formGroup]="registerForm">
 
 
                 <div class="form-group" >
@@ -46,7 +46,7 @@
                 </div>
 
                 <div class="form-group text-center">
-                    <button (click)="register()" class="btn btn-success btn-block" [disabled]="!registerform.valid">Zarejestruj</button>
+                    <button (click)="register()" class="btn btn-success btn-block" [disabled]="!registerForm.valid">Zarejestruj</button>
                 </div>
             </form>
         </div>

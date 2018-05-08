@@ -1,8 +1,7 @@
-import { NgModule, Pipe, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../core/auth.service';
-import { ReactiveFormsModule, FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
-import { BrowserModule } from '@angular/platform-browser';
+import { FormGroup, FormControl, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-register',
@@ -10,7 +9,7 @@ import { BrowserModule } from '@angular/platform-browser';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-  registerform: FormGroup;
+  registerForm: FormGroup;
   email: FormControl;
   password: FormControl;
   displayName: FormControl;
@@ -39,7 +38,7 @@ export class RegisterComponent implements OnInit {
   }
 
   createForm() {
-    this.registerform = new FormGroup({
+    this.registerForm = new FormGroup({
       displayName: this.displayName,
       email: this.email,
       password: this.password
@@ -47,12 +46,12 @@ export class RegisterComponent implements OnInit {
   }
 
   register() {
-    if (this.registerform.valid) {
+    if (this.registerForm.valid) {
       const photoURL = 'https://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png';
       Promise.resolve()
         .then(() => {
           this.authService.signup(this.email.value, this.password.value, this.displayName.value, photoURL);
-          this.registerform.reset();
+          this.registerForm.reset();
         })
         .then(() => {
           this.authService.emailLogin(String(this.email.value), String(this.password.value));
