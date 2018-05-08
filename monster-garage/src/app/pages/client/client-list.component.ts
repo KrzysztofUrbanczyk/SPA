@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
   selector: 'app-client-list',
   templateUrl: './client-list.component.html',
   styles: [`nb-card {
-  transform: translate3d(0, 0, 0);
+  transform: translate3d(2, 2, 2);
   }`],
 })
 export class ClientListComponent {
@@ -46,23 +46,6 @@ export class ClientListComponent {
         title: 'Tablice',
         type: 'string',
       },
-      comment: {
-        title: 'Komentarz',
-        type: 'string',
-      },
-      createdAt: {
-        title: 'Data',
-        type: 'string',
-      },
-      deadline: {
-        title: 'Termin',
-        type: 'string',
-      },
-      price: {
-        title: 'Cena',
-        type: 'string',
-      },
-
     },
   };
 
