@@ -1,38 +1,27 @@
 <nb-layout>
     <nb-layout-column>
-        <div class="row">
-        <div class="col-4">
-        </div>
-
-        <div class="col-4">
-                <h2>Profil użytkownika</h2>
-                <img src="{{ user.photoURL }}" />
-                <span>
-                    <strong>{{user?.displayName}}</strong>
-                    <br />
-                    <strong>{{user?.email}}</strong>
-                </span>
-
-                <hr />
-                <form novalidate [formGroup]="editForm">
-                    <div class="form-group">
-                        <label for="displayName">Edytuj nazwę użytkownika</label>
-                        <input type="text" class="form-control" id="displayName" formControlName="displayName" required
-                               [ngClass]="{
+        <div class="col-6">
+            <h3>Profil użytkownika</h3>
+            <div class="profil-info">
+                <h2>{{user?.displayName}}</h2>
+                <strong>{{user?.email}}</strong>
+            </div>
+            <hr/>
+            <form novalidate [formGroup]="editForm">
+                <div class="form-group">
+                    <label for="displayName">Edytuj nazwę użytkownika</label>
+                    <input type="text" class="form-control" id="displayName" formControlName="displayName" required
+                           [ngClass]="{
                         'is-invalid': displayName.invalid && (displayName.dirty || displayName.touched),
                         'is-valid': displayName.valid && (displayName.dirty || displayName.touched)}">
-                        <div class="form-control-feedback"
-                             *ngIf="displayName.errors && (displayName.dirty || displayName.touched)">
-                            <p *ngIf="displayName.errors.minlength">Nazwa musi zawierać przynajmniej 3 znaki!</p>
-                        </div>
+                    <div class="form-control-feedback"
+                         *ngIf="displayName.errors && (displayName.dirty || displayName.touched)">
+                        <p *ngIf="displayName.errors.minlength">Nazwa musi zawierać przynajmniej 3 znaki!</p>
                     </div>
-                    <button (click)="updateData()" class="btn btn-success btn-block" [disabled]="!editForm.valid">
-                        Gotowe
-                    </button>
-                </form>
-        </div>
-        <div class="col-4">
-        </div>
+                </div>
+                <button (click)="updateData()" class="btn btn-success btn-block" [disabled]="!editForm.valid">Gotowe
+                </button>
+            </form>
         </div>
     </nb-layout-column>
 </nb-layout>
