@@ -27,7 +27,6 @@ export class CurrentDateService {
     this.dd = this.today.getDate();
     this.mm = this.today.getMonth() + 1;
     this.yyyy = this.today.getFullYear();
-    
     if (this.dd < 10) {
       this.dd = '0' + this.dd;
     }
