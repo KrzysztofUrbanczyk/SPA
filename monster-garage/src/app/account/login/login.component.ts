@@ -12,7 +12,7 @@ export class LoginComponent implements OnInit {
   password: string;
 
   constructor(public authService: AuthService,
-              private router: Router) {
+    private router: Router) {
   }
 
   ngOnInit() {
@@ -20,8 +20,10 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    this.authService.emailLogin(this.email, this.password);
-    this.email = this.password = '';
-    setTimeout(() => this.router.navigateByUrl('/pages'), 2000);
+    this.authService.emailLogin(this.email, this.password)
+      .then(() => {
+        this.email = this.password = '';
+        this.router.navigateByUrl('/pages');
+      });
   }
 }
