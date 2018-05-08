@@ -30,7 +30,7 @@ export class RegisterComponent implements OnInit {
     ]);
     this.email = new FormControl('', [
       Validators.required,
-      Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")
+      Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')
     ]);
     this.password = new FormControl('', [
       Validators.required,
@@ -48,7 +48,7 @@ export class RegisterComponent implements OnInit {
 
   register() {
     if (this.registerform.valid) {
-      let photoURL = 'https://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png';
+      const photoURL = 'https://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png';
       Promise.resolve()
         .then(() => {
           this.authService.signup(this.email.value, this.password.value, this.displayName.value, photoURL);
@@ -57,7 +57,7 @@ export class RegisterComponent implements OnInit {
         .then(() => {
           this.authService.emailLogin(String(this.email.value), String(this.password.value));
           this.router.navigateByUrl('/pages');
-        })
+        });
     }
   }
 }
