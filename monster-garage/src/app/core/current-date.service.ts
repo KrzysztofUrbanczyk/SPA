@@ -3,6 +3,7 @@ export class CurrentDateService {
   private dd;
   private mm;
   private yyyy;
+  private daa: Date;
 
   getCurrentFormattedDate() {
     this.today = new Date();
@@ -22,11 +23,11 @@ export class CurrentDateService {
   }
 
   getFormattedRecentDate(numberOfDays: number) {
-    this.today = new Date();
-    this.dd = this.today.getDate() - numberOfDays;
+    this.today = this.removeDays(new Date(), numberOfDays);
+    this.dd = this.today.getDate();
     this.mm = this.today.getMonth() + 1;
     this.yyyy = this.today.getFullYear();
-
+    
     if (this.dd < 10) {
       this.dd = '0' + this.dd;
     }
@@ -37,4 +38,10 @@ export class CurrentDateService {
 
     return this.today = this.yyyy + '-' + this.mm + '-' + this.dd;
   }
+
+  removeDays(date: Date, days: number): Date {
+    date.setDate(date.getDate() - days);
+    return date;
+}
+
 }
