@@ -6,22 +6,46 @@
         <div class="col-lg-4">
         </div>
         <div class="form col-lg-4">
-            <form >
-                <div class="form-group">
-                    <label for="displayName">Nazwa uzytkownika</label>
-                    <input type="text" class="form-control" id="displayName" name="displayName" [(ngModel)]="displayName" required />
+            <form novalidate [formGroup]="registerForm">
+
+
+                <div class="form-group" >
+                    <label>Nazwa użytkownika</label>
+                    <input type="text" class="form-control" formControlName="displayName" required [ngClass]="{
+                        'is-invalid': displayName.invalid && (displayName.dirty || displayName.touched),
+                        'is-valid': displayName.valid && (displayName.dirty || displayName.touched)
+                      }">
+                    <div class="form-control-feedback" *ngIf="displayName.errors && (displayName.dirty || displayName.touched)">
+                        <p *ngIf="displayName.errors.required">Nazwa użytkownika jest wymagana!</p>
+                    </div>
                 </div>
+
                 <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="text" class="form-control" id="email" name="email" [(ngModel)]="email" required />
+                    <label>Email</label>
+                    <input type="email" class="form-control" formControlName="email" required [ngClass]="{
+                        'is-invalid': email.invalid && (email.dirty || email.touched),
+                        'is-valid': email.valid && (email.dirty || email.touched)
+                   }">
+                    <div class="form-control-feedback" *ngIf="email.errors && (email.dirty || email.touched)">
+                        <p *ngIf="email.errors.required">Adres Email jest wymagany!</p>
+                        <p *ngIf="email.errors.pattern">Adres Email musi być poprawny!</p>
+                    </div>
                 </div>
+
                 <div class="form-group">
-                    <label for="password">Hasło</label>
-                    <input type="password" class="form-control" id="password" name="password" [(ngModel)]="password" required />
+                    <label>Hasło</label>
+                    <input type="password" class="form-control" formControlName="password" required [ngClass]="{
+                        'is-invalid': password.invalid && (password.dirty || password.touched),
+                        'is-valid': password.valid && (password.dirty || password.touched)
+                   }">
+                    <div class="form-control-feedback" *ngIf="password.errors && (password.dirty || password.touched)">
+                        <p *ngIf="password.errors.required">Hasło jest wymagane!</p>
+                        <p *ngIf="password.errors.minlength">Hasło musi zawierać 6 znaków!</p>
+                    </div>
                 </div>
+
                 <div class="form-group text-center">
-                    <button (click)="register()" class="btn btn-success btn-block">Zarejestruj</button>
-                    <div>{{msg | json}}</div>
+                    <button (click)="register()" class="btn btn-success btn-block" [disabled]="!registerForm.valid">Zarejestruj</button>
                 </div>
             </form>
         </div>

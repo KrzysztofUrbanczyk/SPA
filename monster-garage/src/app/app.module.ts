@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './account/login/login.component';
 import { AppRoutingModule } from './app-routing.module';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AngularFireModule } from 'angularfire2';
 import { environment } from '../environments/environment';
 import { RegisterComponent } from './account/register/register.component';
@@ -12,7 +12,9 @@ import { AuthGuard } from './core/auth.guard';
 import { ThemeModule } from './@theme/theme.module';
 import { SimpleNotificationsModule } from 'angular2-notifications';
 import { LogoutComponent } from './account/logout/logout.component';
-import {NotifyService} from './core/notify.service';
+import { HttpClientModule } from '@angular/common/http';
+import { EmailService } from './core/email.service';
+import { ToastrModule } from 'ng2-toastr-notifications';
 
 @NgModule({
   declarations: [
@@ -28,9 +30,12 @@ import {NotifyService} from './core/notify.service';
     AngularFireModule.initializeApp(environment.firebase),
     CoreModule,
     SimpleNotificationsModule.forRoot(),
-    ThemeModule.forRoot()
+    ThemeModule.forRoot(),
+    ToastrModule.forRoot(),
+    HttpClientModule,
+    ReactiveFormsModule
   ],
-  providers: [AuthGuard, NotifyService],
+  providers: [AuthGuard, EmailService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

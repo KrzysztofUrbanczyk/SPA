@@ -7,20 +7,37 @@
         <div class="col-lg-4">
         </div>
         <div class="form col-lg-4">
-            <form>
+            <form novalidate [formGroup]="loginform">
+
                 <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="text" class="form-control" id="email" name="email" [(ngModel)]="email" required />
+                    <label>Email</label>
+                    <input type="text" class="form-control" formControlName="email" required [ngClass]="{
+                                'is-invalid': email.invalid && (email.dirty || email.touched),
+                                'is-valid': email.valid && (email.dirty || email.touched)
+                           }">
+                    <div class="form-control-feedback" *ngIf="email.errors && (email.dirty || email.touched)">
+                        <p *ngIf="email.errors.required">Adres Email jest wymagany!</p>
+                        <p *ngIf="email.errors.pattern">Adres Email musi być poprawny!</p>
+                    </div>
                 </div>
+
                 <div class="form-group">
-                    <label for="password">Hasło</label>
+                    <label>Hasło</label>
                     <span class="forget-link">
                         <a tabindex="-1" href="/">Nie pamiętasz hasła?</a>
                     </span>
-                    <input type="password" class="form-control" id="password" name="password" [(ngModel)]="password" required />
+                    <input type="password" class="form-control" formControlName="password" required [ngClass]="{
+                            'is-invalid': password.invalid && (password.dirty || password.touched),
+                            'is-valid': password.valid && (password.dirty || password.touched)
+                       }">
+                    <div class="form-control-feedback" *ngIf="password.errors && (password.dirty || password.touched)">
+                        <p *ngIf="password.errors.required">Hasło jest wymagane!</p>
+                        <p *ngIf="password.errors.minlength">Hasło musi zawierać 6 znaków!</p>
+                    </div>
                 </div>
+
                 <div class="form-group text-center">
-                    <button (click)="login()" class="btn btn-success btn-block">Zaloguj</button>
+                    <button (click)="login()" class="btn btn-success btn-block" [disabled]="!loginform.valid">Zaloguj</button>
                 </div>
                 <hr />
                 <div class="social-login-text">

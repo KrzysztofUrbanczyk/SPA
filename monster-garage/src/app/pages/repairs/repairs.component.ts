@@ -42,7 +42,6 @@ export class RepairsComponent implements OnInit {
       price: this.price = 0,
     });
 
-    console.log('Dodane!'); // Need to change to some notification alert
     this.router.navigateByUrl('/pages/show-repairs');
   }
 

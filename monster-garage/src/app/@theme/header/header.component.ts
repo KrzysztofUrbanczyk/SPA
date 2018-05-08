@@ -1,6 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
-
-import { NbMenuService, NbSidebarService, NbContextMenuModule } from '@nebular/theme';
+import { Component, OnInit } from '@angular/core';
+import { NbMenuService, NbSidebarService } from '@nebular/theme';
 import { AuthService } from '../../core/auth.service';
 
 @Component({
@@ -11,11 +10,11 @@ import { AuthService } from '../../core/auth.service';
 export class HeaderComponent implements OnInit {
   user: any;
 
-  userMenu = [{ title: 'Profil', link: '/pages/forms/profile' }, { title: 'Wyloguj', link: '/logout' }];
+  userMenu = [{title: 'Profil', link: '/pages/forms/profile'}, {title: 'Wyloguj', link: '/logout'}];
 
   constructor(private sidebarService: NbSidebarService,
-    private menuService: NbMenuService,
-    private auth: AuthService ) {
+              private menuService: NbMenuService,
+              private auth: AuthService) {
   }
 
   ngOnInit() {

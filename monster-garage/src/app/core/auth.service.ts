@@ -1,13 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-
 import * as firebase from 'firebase/app';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFirestore, AngularFirestoreDocument } from 'angularfire2/firestore';
-
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/switchMap';
-import { NotifyService } from './notify.service';
+import { ToastrController } from 'ng2-toastr-notifications';
 
 interface User {
   uid: string;
@@ -22,9 +20,9 @@ export class AuthService {
   user: Observable<User>;
 
   constructor(private afAuth: AngularFireAuth,
-    private afs: AngularFirestore,
-    private router: Router,
-    public notify: NotifyService) {
+              private afs: AngularFirestore,
+              private router: Router,
+              private toastCtrl: ToastrController) {
 
     this.user = this.afAuth.authState
       .switchMap(user => {
@@ -37,9 +35,8 @@ export class AuthService {
   }
 
   signup(email: string, password: string, displayName: string, photoURL: string) {
-    this.afAuth.auth.createUserWithEmailAndPassword(email, password)
+    return this.afAuth.auth.createUserWithEmailAndPassword(email, password)
       .then((user) => {
-        this.notify.update('Rejestracja przebiegła pomyślnie!', 'success');
         const data: User = {
           uid: user.uid,
           email: user.email,
@@ -56,8 +53,7 @@ export class AuthService {
   }
 
   emailLogin(email: string, password: string) {
-    return this.afAuth.auth.signInWithEmailAndPassword(email, password)
-      .catch(error => this.handleError(error));
+    return this.afAuth.auth.signInWithEmailAndPassword(email, password);
   }
 
   twitterLogin() {
@@ -80,25 +76,21 @@ export class AuthService {
 
   public updateUserData(user) {
     const userRef: AngularFirestoreDocument<User> = this.afs.doc(`users/${user.uid}`);
-    this.notify.updateData();
     const data: User = {
       uid: user.uid,
       email: user.email,
       displayName: user.displayName,
       photoURL: user.photoURL
     };
-      return this.afs.doc<User>(`users/${user.uid}`).set(data);
-
+    return this.afs.doc<User>(`users/${user.uid}`).set(data);
   }
 
-
   public handleError(error) {
-    console.log(error);
-    this.notify.update(error.message, 'error');
   }
 
   logout() {
     this.afAuth.auth.signOut().then(() => {
+      this.toastCtrl.show({type: 'success', title: 'Sukces', message: 'Pomyślnie wylogowano'});
       this.router.navigateByUrl('/login');
     });
   }
