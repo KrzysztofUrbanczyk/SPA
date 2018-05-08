@@ -14,7 +14,7 @@ import { SimpleNotificationsModule } from 'angular2-notifications';
 import { LogoutComponent } from './account/logout/logout.component';
 import { HttpClientModule } from '@angular/common/http';
 import { EmailService } from './core/email.service';
-
+import { ToastrModule } from 'ng2-toastr-notifications';
 
 @NgModule({
   declarations: [
@@ -31,6 +31,7 @@ import { EmailService } from './core/email.service';
     CoreModule,
     SimpleNotificationsModule.forRoot(),
     ThemeModule.forRoot(),
+    ToastrModule.forRoot(),
     HttpClientModule,
     ReactiveFormsModule
   ],
