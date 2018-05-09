@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../core/auth.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ToastrController } from 'ng2-toastr-notifications';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-register',
@@ -19,12 +20,17 @@ export class RegisterComponent implements OnInit {
 
   constructor(public authService: AuthService,
     private router: Router,
-    private toastCtrl: ToastrController) {
+    private toastCtrl: ToastrController,
+    private location: Location) {
   }
 
   ngOnInit() {
     this.createFormControls();
     this.createForm();
+  }
+
+  goBack() {
+    this.location.back();
   }
 
   createFormControls() {

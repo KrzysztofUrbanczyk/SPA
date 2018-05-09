@@ -3,6 +3,7 @@ import { AuthService } from '../../core/auth.service';
 import { Router } from '@angular/router';
 import { ToastrController } from 'ng2-toastr-notifications';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-reset-password',
@@ -16,8 +17,9 @@ export class ResetPasswordComponent implements OnInit {
   public loading = false;
 
   constructor(public authService: AuthService,
-              private router: Router,
-              private toastCtrl: ToastrController) {
+    private router: Router,
+    private toastCtrl: ToastrController,
+    private location: Location) {
   }
 
   ngOnInit() {
@@ -25,8 +27,12 @@ export class ResetPasswordComponent implements OnInit {
     this.createForm();
   }
 
-  createFormControls() {
+  goBack() {
+    this.location.back();
+  }
 
+
+  createFormControls() {
     this.email = new FormControl('', [
       Validators.required,
       Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9]+[.]{1}[a-z]{2,4}$')
@@ -55,7 +61,7 @@ export class ResetPasswordComponent implements OnInit {
         .catch((ex) => {
           this.loading = false;
           if (ex.code === 'auth/user-not-found') {
-            this.toastCtrl.show({type: 'error', title: 'Uwaga!', message: 'Podany adres Email nie istnieje!'});
+            this.toastCtrl.show({ type: 'error', title: 'Uwaga!', message: 'Podany adres Email nie istnieje!' });
           } else {
             this.toastCtrl.show({ type: 'error', title: 'Uwaga!', message: 'Coś poszło nie tak!' });
           }
