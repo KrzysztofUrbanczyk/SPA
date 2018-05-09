@@ -35,10 +35,7 @@ export class AuthService {
   }
 
   resetPassword(email: string) {
-    return this.afAuth.auth.sendPasswordResetEmail(email)
-      .catch(function (error) {
-        this.handleError(error);
-      });
+    return this.afAuth.auth.sendPasswordResetEmail(email);
   }
 
   signup(email: string, password: string, displayName: string, photoURL: string) {
@@ -52,10 +49,6 @@ export class AuthService {
         };
 
         return this.afs.doc<User>(`users/${user.uid}`).set(data);
-      })
-      .catch(error => {
-        this.handleError(error);
-        return false;
       });
   }
 

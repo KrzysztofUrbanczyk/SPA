@@ -18,8 +18,8 @@ export class RegisterComponent implements OnInit {
   public loading = false;
 
   constructor(public authService: AuthService,
-              private router: Router,
-              private toastCtrl: ToastrController) {
+    private router: Router,
+    private toastCtrl: ToastrController) {
   }
 
   ngOnInit() {
@@ -63,6 +63,14 @@ export class RegisterComponent implements OnInit {
             message: 'Udało się! Zostałeś automatycznie zalogowany'
           });
           this.router.navigateByUrl('/pages');
+        })
+        .catch((ex) => {
+          this.loading = false;
+          if (ex.code === 'auth/email-already-in-use') {
+            this.toastCtrl.show({ type: 'error', title: 'Uwaga!', message: 'Podany adres Email jest już zarejestrowany!' });
+          } else {
+            this.toastCtrl.show({ type: 'error', title: 'Uwaga!', message: 'Coś poszło nie tak!' });
+          }
         });
     }
   }

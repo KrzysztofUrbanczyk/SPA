@@ -52,8 +52,11 @@ export class LoginComponent implements OnInit {
           this.router.navigateByUrl('/pages');
         })
         .catch((ex) => {
+          this.loading = false;
           if (ex.code === 'auth/user-not-found') {
             this.toastCtrl.show({type: 'error', title: 'Uwaga!', message: 'Błędne dane!'});
+          } else {
+            this.toastCtrl.show({ type: 'error', title: 'Uwaga!', message: 'Coś poszło nie tak!' });
           }
         });
     }

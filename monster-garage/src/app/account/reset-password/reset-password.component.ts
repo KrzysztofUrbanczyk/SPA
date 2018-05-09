@@ -51,6 +51,14 @@ export class ResetPasswordComponent implements OnInit {
             message: 'Hasło zostało zresetowane!'
           });
           this.router.navigateByUrl('/pages');
+        })
+        .catch((ex) => {
+          this.loading = false;
+          if (ex.code === 'auth/user-not-found') {
+            this.toastCtrl.show({type: 'error', title: 'Uwaga!', message: 'Podany adres Email nie istnieje!'});
+          } else {
+            this.toastCtrl.show({ type: 'error', title: 'Uwaga!', message: 'Coś poszło nie tak!' });
+          }
         });
     }
   }
