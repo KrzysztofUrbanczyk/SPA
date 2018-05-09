@@ -1,4 +1,5 @@
 <div class="container">
+    <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
     <div class="row">
         <div class="col-lg-12 text-center">
             <img src="assets/images/logo-big.png" />
@@ -24,7 +25,7 @@
                 <div class="form-group">
                     <label>Hasło</label>
                     <span class="forget-link">
-                        <a tabindex="-1" href="/">Nie pamiętasz hasła?</a>
+                        <a tabindex="-1" href="/#/reset-password">Nie pamiętasz hasła?</a>
                     </span>
                     <input type="password" class="form-control" formControlName="password" required [ngClass]="{
                             'is-invalid': password.invalid && (password.dirty || password.touched),

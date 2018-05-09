@@ -16,6 +16,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { EmailService } from './core/email.service';
 import { ToastrModule } from 'ng2-toastr-notifications';
 import { LoadingModule } from 'ngx-loading';
+import { ResetPasswordComponent } from './account/reset-password/reset-password.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { LoadingModule } from 'ngx-loading';
     LoginComponent,
     RegisterComponent,
     LogoutComponent,
+    ResetPasswordComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,18 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { AuthService } from '../../core/auth.service';
-import { FormControl, Validators, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ToastrController } from 'ng2-toastr-notifications';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  selector: 'app-reset-password',
+  templateUrl: './reset-password.component.html',
+  styleUrls: ['./reset-password.component.css']
 })
-export class LoginComponent implements OnInit {
-  loginform: FormGroup;
+export class ResetPasswordComponent implements OnInit {
+  resetForm: FormGroup;
   email: FormControl;
-  password: FormControl;
 
   public loading = false;
 
@@ -27,34 +26,31 @@ export class LoginComponent implements OnInit {
   }
 
   createFormControls() {
+
     this.email = new FormControl('', [
       Validators.required,
       Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9]+[.]{1}[a-z]{2,4}$')
     ]);
-    this.password = new FormControl('', [
-      Validators.required,
-      Validators.minLength(6)
-    ]);
+
   }
 
   createForm() {
-    this.loginform = new FormGroup({
+    this.resetForm = new FormGroup({
       email: this.email,
-      password: this.password
     });
   }
 
-  login() {
-    if (this.loginform.valid) {
+  reset() {
+    if (this.resetForm.valid) {
       this.loading = true;
-      this.authService.emailLogin(this.email.value, this.password.value)
+      this.authService.resetPassword(this.email.value)
         .then(() => {
+          this.toastCtrl.show({
+            type: 'success',
+            title: 'Sukces',
+            message: 'Hasło zostało zresetowane!'
+          });
           this.router.navigateByUrl('/pages');
-        })
-        .catch((ex) => {
-          if (ex.code === 'auth/user-not-found') {
-            this.toastCtrl.show({type: 'error', title: 'Uwaga!', message: 'Błędne dane!'});
-          }
         });
     }
   }

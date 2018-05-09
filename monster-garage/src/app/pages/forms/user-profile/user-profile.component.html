@@ -1,5 +1,5 @@
-<nb-layout>
-    <nb-layout-column>
+<nb-card>
+    <nb-card-body>
         <div class="col-6">
             <h3>Profil użytkownika</h3>
             <div class="profil-info">
@@ -10,12 +10,10 @@
             <form novalidate [formGroup]="editForm">
                 <div class="form-group">
                     <label for="displayName">Edytuj nazwę użytkownika</label>
-                    <input type="text" class="form-control" id="displayName" formControlName="displayName" required
-                           [ngClass]="{
+                    <input type="text" class="form-control" id="displayName" formControlName="displayName" required [ngClass]="{
                         'is-invalid': displayName.invalid && (displayName.dirty || displayName.touched),
                         'is-valid': displayName.valid && (displayName.dirty || displayName.touched)}">
-                    <div class="form-control-feedback"
-                         *ngIf="displayName.errors && (displayName.dirty || displayName.touched)">
+                    <div class="form-control-feedback" *ngIf="displayName.errors && (displayName.dirty || displayName.touched)">
                         <p *ngIf="displayName.errors.minlength">Nazwa musi zawierać przynajmniej 3 znaki!</p>
                     </div>
                 </div>
@@ -23,5 +21,5 @@
                 </button>
             </form>
         </div>
-    </nb-layout-column>
-</nb-layout>
+    </nb-card-body>
+</nb-card>
