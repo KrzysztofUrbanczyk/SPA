@@ -14,6 +14,8 @@ export class LoginComponent implements OnInit {
   email: FormControl;
   password: FormControl;
 
+  public loading = false;
+
   constructor(public authService: AuthService,
               private router: Router,
               private toastCtrl: ToastrController) {
@@ -44,9 +46,9 @@ export class LoginComponent implements OnInit {
 
   login() {
     if (this.loginform.valid) {
+      this.loading = true;
       this.authService.emailLogin(this.email.value, this.password.value)
         .then(() => {
-          this.loginform.reset();
           this.router.navigateByUrl('/pages');
         })
         .catch((ex) => {

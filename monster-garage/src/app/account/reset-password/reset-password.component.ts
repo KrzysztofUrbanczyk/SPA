@@ -40,7 +40,7 @@ export class ResetPasswordComponent implements OnInit {
     });
   }
 
-  register() {
+  reset() {
     if (this.resetForm.valid) {
       this.loading = true;
       this.authService.resetPassword(this.email.value)
