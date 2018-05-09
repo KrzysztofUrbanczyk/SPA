@@ -61,7 +61,7 @@ createCharByStatsus() {
 
 makeAChar (toDo: number, inProgress: number, done: number) {
     this.chart1 = new Chart('canvas1', {
-        type: 'bar',
+        type: 'pie',
         data: {
             labels: ['W trakcie', 'Do realizacji', 'Zrealizowane'],
             datasets: [{
@@ -81,14 +81,11 @@ makeAChar (toDo: number, inProgress: number, done: number) {
             }]
         },
         options: {
-            scales: {
-                yAxes: [{
-                    ticks: {
-                        beginAtZero: true,
-                    }
-                }]
+            title: {
+              display: true,
+              text: 'Status 20 ostatnich zamówień'
             }
-        }
+          }
     });
 }
 

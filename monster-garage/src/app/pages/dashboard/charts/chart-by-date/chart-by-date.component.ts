@@ -78,7 +78,7 @@ makeAChar (firstDay: number, secondDay: number, thirdDay: number, fourthDay: num
       data: {
           labels: ['Dziś', 'Wczoraj', '2 dni', '3 dni', '4 dni'],
           datasets: [{
-              label: 'Liczba zleceń w ostanich 4 dniach',
+              label: 'Liczba zleceń w ostanich 5 dniach',
               data: [firstDay, secondDay, thirdDay, fourthDay, fifthDay],
               backgroundColor: [
                   'rgba(255, 99, 132, 0.2)',
