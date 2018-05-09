@@ -20,9 +20,9 @@ export class AuthService {
   user: Observable<User>;
 
   constructor(private afAuth: AngularFireAuth,
-              private afs: AngularFirestore,
-              private router: Router,
-              private toastCtrl: ToastrController) {
+    private afs: AngularFirestore,
+    private router: Router,
+    private toastCtrl: ToastrController) {
 
     this.user = this.afAuth.authState
       .switchMap(user => {
@@ -31,6 +31,13 @@ export class AuthService {
         } else {
           return Observable.of(null);
         }
+      });
+  }
+
+  resetPassword(email: string) {
+    return this.afAuth.auth.sendPasswordResetEmail(email)
+      .catch(function (error) {
+        this.handleError(error);
       });
   }
 
@@ -90,7 +97,7 @@ export class AuthService {
 
   logout() {
     this.afAuth.auth.signOut().then(() => {
-      this.toastCtrl.show({type: 'success', title: 'Sukces', message: 'Pomyślnie wylogowano'});
+      this.toastCtrl.show({ type: 'success', title: 'Sukces', message: 'Pomyślnie wylogowano' });
       this.router.navigateByUrl('/login');
     });
   }
