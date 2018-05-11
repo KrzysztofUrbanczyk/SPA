@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
   selector: 'app-client-list',
   templateUrl: './client-list.component.html',
   styles: [`nb-card {
-  transform: translate3d(2, 2, 2);
+      transform: translate3d(2, 2, 2);
   }`],
 })
 export class ClientListComponent {
@@ -53,7 +53,7 @@ export class ClientListComponent {
   clients: Client[] = [];
 
   constructor(private service: ClientListService,
-    private router: Router) {
+              private router: Router) {
     this.service.getData().subscribe(clients => {
       this.clients = clients as Client[];
       this.source.load(this.clients);

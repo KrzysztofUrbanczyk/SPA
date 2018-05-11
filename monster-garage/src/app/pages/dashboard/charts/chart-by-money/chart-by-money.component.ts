@@ -4,7 +4,6 @@ import { Observable } from 'rxjs/Observable';
 import { CurrentDateService } from '../../../../core/current-date.service';
 import { Chart } from 'chart.js';
 
-
 interface Repairs {
   customerName: string;
   customerEmail: string;
@@ -38,51 +37,51 @@ export class ChartByMoneyComponent implements OnInit {
     });
     this.repairs = this.repairsCollection.valueChanges();
 
-  this.createCharByPrice();
+    this.createCharByPrice();
   }
 
   createCharByPrice() {
     this.repairs.subscribe(repairs => {
       this.repairsTable = repairs as Repairs[];
       this.repairsTable.forEach(element => {
-        for ( let i = 0; i < 7; i++ ) {
+        for (let i = 0; i < 7; i++) {
           if (element.createdAt === new CurrentDateService().getFormattedRecentDate(i)) {
             this.pricesPerDay[i] = this.pricesPerDay[i] + parseInt(element.price, 10);
           }
         }
       });
       this.makeAChar();
-   });
+    });
   }
 
-  makeAChar () {
+  makeAChar() {
     this.chart3 = new Chart('canvas3', {
-        type: 'line',
-        data: {
-            labels: ['dziś', 'wczoraj', '2 dni', '3 dni', '4 dni', '5 dni', '6 dni'],
-            datasets: [{
-                label: 'Przychody w ostatnich 7 dniach',
-                data: [this.pricesPerDay[0],
-                       this.pricesPerDay[1],
-                       this.pricesPerDay[2],
-                       this.pricesPerDay[3],
-                       this.pricesPerDay[4],
-                       this.pricesPerDay[5],
-                       this.pricesPerDay[6]
-                ],
-                borderColor: '#3e95cd',
-                fill: false
-            }]
-        },
-        options: {
-            scales: {
-                yAxes: [{
-                    ticks: {
-                        beginAtZero: true,
-                    }
-                }]
+      type: 'line',
+      data: {
+        labels: ['dziś', 'wczoraj', '2 dni', '3 dni', '4 dni', '5 dni', '6 dni'],
+        datasets: [{
+          label: 'Przychody w ostatnich 7 dniach',
+          data: [this.pricesPerDay[0],
+            this.pricesPerDay[1],
+            this.pricesPerDay[2],
+            this.pricesPerDay[3],
+            this.pricesPerDay[4],
+            this.pricesPerDay[5],
+            this.pricesPerDay[6]
+          ],
+          borderColor: '#3e95cd',
+          fill: false
+        }]
+      },
+      options: {
+        scales: {
+          yAxes: [{
+            ticks: {
+              beginAtZero: true,
             }
+          }]
         }
+      }
     });
   }
 

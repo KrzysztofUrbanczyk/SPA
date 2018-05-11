@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
   selector: 'app-show-repairs',
   templateUrl: './show-repairs.component.html',
   styles: [`nb-card {
-  transform: translate3d(0, 0, 0);
+      transform: translate3d(0, 0, 0);
   }`],
 })
 export class ShowRepairsComponent {
@@ -50,6 +50,10 @@ export class ShowRepairsComponent {
         title: 'Komentarz',
         type: 'string',
       },
+      status: {
+        title: 'Status',
+        type: 'string',
+      },
       createdAt: {
         title: 'Data',
         type: 'string',
@@ -66,12 +70,11 @@ export class ShowRepairsComponent {
     },
   };
 
-
   source: LocalDataSource = new LocalDataSource();
   clients: Client[] = [];
 
   constructor(private service: ShowRepairsService,
-    private router: Router) {
+              private router: Router) {
     this.service.getData().subscribe(clients => {
       this.clients = clients as Client[];
       this.source.load(this.clients);

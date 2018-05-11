@@ -56,7 +56,7 @@ export class LoginComponent implements OnInit {
           if (ex.code === 'auth/user-not-found') {
             this.toastCtrl.show({type: 'error', title: 'Uwaga!', message: 'Błędne dane!'});
           } else {
-            this.toastCtrl.show({ type: 'error', title: 'Uwaga!', message: 'Coś poszło nie tak!' });
+            this.toastCtrl.show({type: 'error', title: 'Uwaga!', message: 'Coś poszło nie tak!'});
           }
         });
     }

@@ -17,9 +17,9 @@ export class ResetPasswordComponent implements OnInit {
   public loading = false;
 
   constructor(public authService: AuthService,
-    private router: Router,
-    private toastCtrl: ToastrController,
-    private location: Location) {
+              private router: Router,
+              private toastCtrl: ToastrController,
+              private location: Location) {
   }
 
   ngOnInit() {
@@ -61,9 +61,9 @@ export class ResetPasswordComponent implements OnInit {
         .catch((ex) => {
           this.loading = false;
           if (ex.code === 'auth/user-not-found') {
-            this.toastCtrl.show({ type: 'error', title: 'Uwaga!', message: 'Podany adres Email nie istnieje!' });
+            this.toastCtrl.show({type: 'error', title: 'Uwaga!', message: 'Podany adres Email nie istnieje!'});
           } else {
-            this.toastCtrl.show({ type: 'error', title: 'Uwaga!', message: 'Coś poszło nie tak!' });
+            this.toastCtrl.show({type: 'error', title: 'Uwaga!', message: 'Coś poszło nie tak!'});
           }
         });
     }

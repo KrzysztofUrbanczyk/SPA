@@ -5,8 +5,8 @@ import 'rxjs/add/operator/toPromise';
 @Injectable()
 export class EmailService {
 
-  constructor(private http: HttpClient) { }
-
+  constructor(private http: HttpClient) {
+  }
 
   sendEmail() {
     const url = `https://us-central1-monstergarage-4cdc9.cloudfunctions.net/httpEmail`;
@@ -19,8 +19,6 @@ export class EmailService {
       .catch(err => {
         console.log(err);
       });
-
   }
-
 
 }

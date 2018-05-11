@@ -42,6 +42,6 @@ export class CurrentDateService {
   removeDays(date: Date, days: number): Date {
     date.setDate(date.getDate() - days);
     return date;
-}
+  }
 
 }

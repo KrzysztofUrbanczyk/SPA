@@ -1,14 +1,15 @@
-import { Component} from '@angular/core';
+import { Component } from '@angular/core';
 import { LocalDataSource } from 'ng2-smart-table';
-import {Order, OrderListService} from '../order-list.service';
+import { Order, OrderListService } from '../order-list.service';
+
 @Component({
   selector: 'app-ngx-smart-table',
   templateUrl: './smart-table.component.html',
   styles: [`
-nb-card {
-transform: translate3d(0, 0, 0);
-}
-`],
+      nb-card {
+          transform: translate3d(0, 0, 0);
+      }
+  `],
 })
 export class SmartTableComponent {
 
