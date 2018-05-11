@@ -19,12 +19,9 @@ const APP_NAME = 'MonsterGarage';
 
 exports.httpEmail = functions.https.onRequest((req, res) => {
     return cors(req, res, () => {
-        const email = req.body.to;
-        const displayName = 'User';
-
         return Promise.resolve()
             .then(() => {
-                sendEmail(email, displayName);
+                sendEmail(req.body.to, req.body.displayName, req.body.price);
             })
             .then(() => {
                 res.end();
@@ -36,14 +33,14 @@ exports.httpEmail = functions.https.onRequest((req, res) => {
     })
 });
 
-function sendEmail(email, displayName) {
+function sendEmail(email, displayName, price) {
     const mailOptions = {
         from: `${APP_NAME} <noreply@firebase.com>`,
         to: email,
     };
 
-    mailOptions.subject = `Welcome to ${APP_NAME}!`;
-    mailOptions.text = `Hey ${displayName || ''}! Welcome to ${APP_NAME}. I hope you will enjoy our service.`;
+    mailOptions.subject = `Naprawa została zrealizowana`;
+    mailOptions.text = `Witaj, naprawa Twojego samochodu została zrealizowana. Całkowity koszt usługi wynosi: ${price}`;
     return mailTransport.sendMail(mailOptions).then(() => {
         console.log('New welcome email sent to:', email);
     });

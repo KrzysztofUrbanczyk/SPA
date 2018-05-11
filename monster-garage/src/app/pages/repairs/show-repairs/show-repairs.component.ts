@@ -2,6 +2,10 @@ import { Component } from '@angular/core';
 import { LocalDataSource } from 'ng2-smart-table';
 import { Client, ShowRepairsService } from './show-repairs.service';
 import { Router } from '@angular/router';
+import { StatusConst } from '../../../constants/statusConst';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { ToastrController } from 'ng2-toastr-notifications';
+
 
 @Component({
   selector: 'app-show-repairs',
@@ -12,12 +16,24 @@ import { Router } from '@angular/router';
 })
 export class ShowRepairsComponent {
 
+  private statusList = [
+    {
+      value: StatusConst.IN_PROGRESS,
+      title: StatusConst.IN_PROGRESS
+    },
+    {
+      value: StatusConst.FOR_REALIZATION,
+      title: StatusConst.FOR_REALIZATION
+    },
+    {
+      value: StatusConst.REALIZED,
+      title: StatusConst.REALIZED
+    },
+  ];
+
   settings = {
-    add: {
-      addButtonContent: '<i class="nb-plus"></i>',
-      createButtonContent: '<i class="nb-checkmark"></i>',
-      cancelButtonContent: '<i class="nb-close"></i>',
-      confirmCreate: true,
+    actions: {
+      add: false,
     },
     edit: {
       editButtonContent: '<i class="nb-edit"></i>',
@@ -32,39 +48,37 @@ export class ShowRepairsComponent {
     columns: {
       customerName: {
         title: 'Imię',
-        type: 'string',
       },
       customerEmail: {
         title: 'E-mail',
-        type: 'string',
       },
       car: {
         title: 'Samochód',
-        type: 'string',
       },
       plates: {
         title: 'Tablice',
-        type: 'string',
       },
       comment: {
         title: 'Komentarz',
-        type: 'string',
       },
       status: {
         title: 'Status',
-        type: 'string',
+        type: 'html',
+        editor: {
+          type: 'list',
+          config: {
+            list: this.statusList,
+          }
+        }
       },
       createdAt: {
         title: 'Data',
-        type: 'string',
       },
       deadline: {
         title: 'Termin',
-        type: 'string',
       },
       price: {
         title: 'Cena',
-        type: 'string',
       },
 
     },
@@ -74,19 +88,40 @@ export class ShowRepairsComponent {
   clients: Client[] = [];
 
   constructor(private service: ShowRepairsService,
-              private router: Router) {
+    private router: Router,
+    private http: HttpClient,
+    private toastCtrl: ToastrController) {
     this.service.getData().subscribe(clients => {
       this.clients = clients as Client[];
       this.source.load(this.clients);
     });
   }
 
-  onCreateConfirm(event) {
-    this.service.addClient(event.newData);
-  }
-
   onEditConfirm(event) {
-    this.service.editClient(event.newData);
+    this.service.editClient(event.newData)
+      .then(() => {
+        if (event.data.status !== StatusConst.REALIZED && event.newData.status === StatusConst.REALIZED) {
+          const url = `https://us-central1-monstergarage-4cdc9.cloudfunctions.net/httpEmail`;
+
+          let Params = new HttpParams();
+          Params = Params.append('to', event.data.customerEmail);
+          Params = Params.append('price', event.data.price);
+
+          return this.http.post(url, Params)
+            .toPromise()
+            .then(res => {
+              this.toastCtrl.show({
+                type: 'success',
+                title: 'Sukces',
+                message: 'Użytkownik został powiadomiony o zrealizowaniu naprawy!'
+              });
+            })
+            .catch(err => {
+              console.log(err);
+            });
+
+        }
+      });
   }
 
   onDeleteConfirm(event) {
