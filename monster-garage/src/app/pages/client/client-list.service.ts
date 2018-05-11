@@ -21,13 +21,14 @@ export class ClientListService {
   repairsCollection: AngularFirestoreCollection<Client>;
   repairs: Observable<Client[]>;
 
-  constructor(private afs: AngularFirestore) { }
+  constructor(private afs: AngularFirestore) {
+  }
 
   getData() {
     this.repairsCollection = this.afs.collection('repairs');
     return this.repairsCollection.snapshotChanges()
       .map(actions => {
-        return actions.map(action => ({ uid: action.payload.doc.id, ...action.payload.doc.data() }));
+        return actions.map(action => ({uid: action.payload.doc.id, ...action.payload.doc.data()}));
       });
   }
 

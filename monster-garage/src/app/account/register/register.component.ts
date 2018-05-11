@@ -19,9 +19,9 @@ export class RegisterComponent implements OnInit {
   public loading = false;
 
   constructor(public authService: AuthService,
-    private router: Router,
-    private toastCtrl: ToastrController,
-    private location: Location) {
+              private router: Router,
+              private toastCtrl: ToastrController,
+              private location: Location) {
   }
 
   ngOnInit() {
@@ -73,9 +73,13 @@ export class RegisterComponent implements OnInit {
         .catch((ex) => {
           this.loading = false;
           if (ex.code === 'auth/email-already-in-use') {
-            this.toastCtrl.show({ type: 'error', title: 'Uwaga!', message: 'Podany adres Email jest już zarejestrowany!' });
+            this.toastCtrl.show({
+              type: 'error',
+              title: 'Uwaga!',
+              message: 'Podany adres Email jest już zarejestrowany!'
+            });
           } else {
-            this.toastCtrl.show({ type: 'error', title: 'Uwaga!', message: 'Coś poszło nie tak!' });
+            this.toastCtrl.show({type: 'error', title: 'Uwaga!', message: 'Coś poszło nie tak!'});
           }
         });
     }

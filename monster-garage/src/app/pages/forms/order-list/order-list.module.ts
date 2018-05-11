@@ -18,4 +18,5 @@ import { OrderListService } from './order-list.service';
     OrderListService,
   ],
 })
-export class OrderListModule { }
+export class OrderListModule {
+}
