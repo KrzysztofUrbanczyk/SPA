@@ -59,16 +59,17 @@ export class ChartByMoneyComponent implements OnInit {
     this.chart3 = new Chart('canvas3', {
         type: 'line',
         data: {
-            labels: ['6 dni', '5 dni', '4 dni', '3 dni', '2 dni', 'Wczoraj', 'Dziś'],
+            labels: ['dziś', 'wczoraj', '2 dni', '3 dni', '4 dni', '5 dni', '6 dni'],
             datasets: [{
-                label: 'Suma cen w ostatnich 7 dniach',
-                data: [this.pricesPerDay[6],
-                       this.pricesPerDay[5],
-                       this.pricesPerDay[4],
-                       this.pricesPerDay[3],
-                       this.pricesPerDay[2],
+                label: 'Przychody w ostatnich 7 dniach',
+                data: [this.pricesPerDay[0],
                        this.pricesPerDay[1],
-                       this.pricesPerDay[0]],
+                       this.pricesPerDay[2],
+                       this.pricesPerDay[3],
+                       this.pricesPerDay[4],
+                       this.pricesPerDay[5],
+                       this.pricesPerDay[6]
+                ],
                 borderColor: '#3e95cd',
                 fill: false
             }]
